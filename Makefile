@@ -6,13 +6,14 @@
 #    By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/17 14:32:32 by tda-silv          #+#    #+#              #
-#    Updated: 2022/10/18 15:13:12 by tda-silv         ###   ########.fr        #
+#    Updated: 2022/10/20 16:16:23 by tda-silv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = clang
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = 
+#CFLAGS = -Wall -Wextra -Werror
 
 NAME = fdf
 
