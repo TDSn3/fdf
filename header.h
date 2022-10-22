@@ -6,13 +6,14 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:29:18 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/10/18 15:12:55 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/10/22 17:32:15 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HEADER_H
 # define HEADER_H
 
+#include <math.h>
 #include <mlx.h>
 #include "./struct.h"
 
