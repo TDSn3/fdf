@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:27:35 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/10/21 18:51:56 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/10/23 01:56:54 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 float	my_abs(float nb);
 void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data *img);
+float	rotate_pixel_x(int Ox, int Oy, int Mx, int My);
+float	rotate_pixel_y(int Ox, int Oy, int Mx, int My);
 
 int	main(void)
 {
@@ -29,17 +31,33 @@ int	main(void)
 	img.img = mlx_new_image(mlx, 1920, 1080);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
 
-	line_put(960, 540, 1060, 490, mlx, mlx_win, &img);
-	line_put(960, 540, 1010, 440, mlx, mlx_win, &img);
+	int		tab[3][3] = {{0, 0, 0},
+						 {0, 0, 0},
+						 {0, 0, 0}};
 
-	line_put(960, 540, 910, 440, mlx, mlx_win, &img);
-	line_put(960, 540, 860, 490, mlx, mlx_win, &img);
-
-	line_put(960, 540, 860, 590, mlx, mlx_win, &img);
-	line_put(960, 540, 910, 640, mlx, mlx_win, &img);
-	
-	line_put(960, 540, 1010, 640, mlx, mlx_win, &img);
-	line_put(960, 540, 1060, 590, mlx, mlx_win, &img);
+	int i = 0;
+	int j = 0;
+	while (i < 3)
+	{
+		while (j < 3)
+		{
+			if (i + 1 < 3)
+				line_put(rotate_pixel_x(3 * 50 + 200, 3 * 50 + 200, (i * 50 + 200), (j * 50 + 200)),
+						 rotate_pixel_y(3 * 50 + 200, 3 * 50 + 200, (i * 50 + 200), (j * 50 + 200)),
+						 rotate_pixel_x(3 * 50 + 200, 3 * 50 + 200, (i + 1) * 50 + 200, j * 50 + 200),
+						 rotate_pixel_y(3 * 50 + 200, 3 * 50 + 200, (i + 1) * 50 + 200, j * 50 + 200),
+						 mlx, mlx_win, &img);
+			if (j + 1 < 3)
+				line_put(rotate_pixel_x(3 * 50 + 200, 3 * 50 + 200, (i * 50 + 200), (j * 50 + 200)),
+						 rotate_pixel_y(3 * 50 + 200, 3 * 50 + 200, (i * 50 + 200), (j * 50 + 200)),
+						 rotate_pixel_x(3 * 50 + 200, 3 * 50 + 200, (i * 50 + 200), ((j + 1) * 50 + 200)),
+						 rotate_pixel_y(3 * 50 + 200, 3 * 50 + 200, (i * 50 + 200), ((j + 1) * 50 + 200)),
+						 mlx, mlx_win, &img);
+			j++;
+		}
+		j = 0;
+		i++;
+	}
 
 	mlx_loop(mlx);
 	mlx_destroy_image(mlx, img.img);
@@ -287,4 +305,26 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data *
 			}
 		}
 	}
+}
+
+float	rotate_pixel_x(int Ox, int Oy, int Mx, int My)
+{
+	float	xM, yM, x, y, angle;
+	angle = 45 * M_PI / 180;
+	xM = Mx - Ox; 
+	yM = My - Oy;
+	x = xM * cosf(angle) + yM * sinf(angle) + Ox;
+	y = - xM * sinf(angle) + yM * cosf(angle) + Oy;
+	return (x);
+}
+
+float	rotate_pixel_y(int Ox, int Oy, int Mx, int My)
+{
+	float	xM, yM, x, y, angle;
+	angle = 45 * M_PI / 180;
+	xM = Mx - Ox; 
+	yM = My - Oy;
+	x = xM * cosf(angle) + yM * sinf(angle) + Ox;
+	y = - xM * sinf(angle) + yM * cosf(angle) + Oy;
+	return (y);
 }
