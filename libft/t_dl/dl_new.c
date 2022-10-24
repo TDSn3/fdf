@@ -1,21 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   header.h                                           :+:      :+:    :+:   */
+/*   dl_new.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 14:29:18 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/10/24 19:22:52 by tda-silv         ###   ########.fr       */
+/*   Created: 2022/03/16 10:59:24 by tda-silv          #+#    #+#             */
+/*   Updated: 2022/10/24 20:38:13 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HEADER_H
-# define HEADER_H
+#include "../libft.h"
 
-#include <math.h>
-#include <mlx.h>
-#include <libft.h>
-#include "./struct.h"
+t_dl	*dl_new(int content)
+{
+	t_dl	*new_dl;
+	t_li	*new_li;
 
-#endif
+	new_dl = malloc(sizeof(t_dl));
+	if (!new_dl)
+		return (NULL);
+	new_li = li_new(-1);
+	if (!new_li)
+		return (NULL);
+	new_dl->next_li = new_li;
+	new_dl->content = content;
+	new_dl->next = NULL;
+	new_dl->prev = NULL;
+	new_dl->prev_li = NULL;
+	return (new_dl);
+}

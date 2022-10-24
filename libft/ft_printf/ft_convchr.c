@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   header.h                                           :+:      :+:    :+:   */
+/*   ft_convchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tda-silv <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 14:29:18 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/10/24 19:22:52 by tda-silv         ###   ########.fr       */
+/*   Created: 2022/03/31 15:23:56 by tda-silv          #+#    #+#             */
+/*   Updated: 2022/03/31 15:28:05 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HEADER_H
-# define HEADER_H
+#include "ft_printf.h"
 
-#include <math.h>
-#include <mlx.h>
-#include <libft.h>
-#include "./struct.h"
+int	ft_convchr(const char *s, t_data *data)
+{
+	size_t	i;
 
-#endif
+	i = 0;
+	while ((s + data->pos)[i])
+	{
+		if ((s + data->pos)[i] == '%')
+		{
+			data->pos += i + 1;
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}

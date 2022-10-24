@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   header.h                                           :+:      :+:    :+:   */
+/*   ft_idconv_s.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tda-silv <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 14:29:18 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/10/24 19:22:52 by tda-silv         ###   ########.fr       */
+/*   Created: 2022/03/31 17:28:32 by tda-silv          #+#    #+#             */
+/*   Updated: 2022/03/31 17:29:09 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HEADER_H
-# define HEADER_H
+#include "ft_printf.h"
 
-#include <math.h>
-#include <mlx.h>
-#include <libft.h>
-#include "./struct.h"
-
-#endif
+void	ft_idconv_s(t_data *data, va_list *ellipse)
+{
+	data->s = va_arg(*ellipse, char *);
+	if (data->s)
+		ft_putstr(data->s, data);
+	else
+	{
+		write(1, "(null)", 6);
+		data->nbr_return += 6;
+	}
+	data->pos += 1;
+}

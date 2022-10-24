@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   header.h                                           :+:      :+:    :+:   */
+/*   ft_putnbr_unsigned.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tda-silv <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 14:29:18 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/10/24 19:22:52 by tda-silv         ###   ########.fr       */
+/*   Created: 2022/03/31 16:05:52 by tda-silv          #+#    #+#             */
+/*   Updated: 2022/04/01 17:03:16 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HEADER_H
-# define HEADER_H
+#include "ft_printf.h"
 
-#include <math.h>
-#include <mlx.h>
-#include <libft.h>
-#include "./struct.h"
-
-#endif
+void	ft_putnbr_unsigned(unsigned int nbr, t_data *data)
+{
+	if (nbr > 9)
+		ft_putnbr_unsigned(nbr / 10, data);
+	ft_putchar(nbr % 10 + '0', data);
+}

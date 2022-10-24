@@ -6,13 +6,13 @@
 #    By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/17 14:32:32 by tda-silv          #+#    #+#              #
-#    Updated: 2022/10/22 10:46:42 by tda-silv         ###   ########.fr        #
+#    Updated: 2022/10/24 19:19:11 by tda-silv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 OS = `uname -a`
 
-CC = clang
+CC = gcc
 
 CFLAGS = 
 #CFLAGS = -Wall -Wextra -Werror
@@ -38,7 +38,7 @@ OBJ = $(SRC:.c=.o)
 # **************************************************************************** #
 
 %.o: %.c
-	$(CC) $(CFLAGS) -Imlx_macos -c $< -o $@
+	$(CC) $(CFLAGS) -Imlx_macos -Ilibft -c $< -o $@
 
 ################################################################################
 
@@ -58,15 +58,21 @@ all: $(NAME) $(HEADERS)
 
 $(NAME): $(OBJ)
 	echo $(OS)
-	cd mlx_macos; make; cd ..
-	$(CC) $(OBJ) -Lmlx_macos -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	cd mlx_macos; make
+	cd mlx_linux; make
+	cd libft; make
+	$(CC) $(OBJ) -Lmlx_macos -lmlx -Llibft -lft -framework OpenGL -framework AppKit -o $(NAME)
 
 ################################################################################
 
 clean:
+	cd mlx_linux; make clean
+	cd mlx_macos; make clean
+	cd libft; make clean
 	rm -f $(OBJ)
 
 fclean: clean
+	cd libft; make fclean
 	rm -f $(NAME)
 
 re: fclean all

@@ -1,21 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   header.h                                           :+:      :+:    :+:   */
+/*   dl_find_content.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 14:29:18 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/10/24 19:22:52 by tda-silv         ###   ########.fr       */
+/*   Created: 2022/10/24 21:07:07 by tda-silv          #+#    #+#             */
+/*   Updated: 2022/10/24 21:07:11 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HEADER_H
-# define HEADER_H
+#include "../libft.h"
 
-#include <math.h>
-#include <mlx.h>
-#include <libft.h>
-#include "./struct.h"
+t_li	*dl_find_content(t_dl *lst, int content)
+{
+	t_dl	*nextl;
+	size_t	i;
 
-#endif
+	i = 0;
+	nextl = lst;
+	if (!lst)
+		return (NULL);
+	while (nextl)
+	{
+		if (nextl->content == content)
+			return (nextl->next_li);
+		nextl = nextl->next;
+		i++;
+	}
+	return (NULL);
+}
