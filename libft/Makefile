@@ -6,7 +6,7 @@
 #    By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/11 16:59:26 by tda-silv          #+#    #+#              #
-#    Updated: 2022/10/24 21:05:28 by tda-silv         ###   ########.fr        #
+#    Updated: 2022/10/25 16:04:55 by tda-silv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,22 +56,44 @@ SRC = ./ft_isalpha.c \
 	  ./get_next_line/get_next_line_bonus.c \
 	  ./my_strjoin_free.c \
 	  $(addprefix ./t_dl/, \
-	  	dl_add_back.c \
-		dl_clear_one.c \
-		dl_clear.c \
-		dl_find_content.c \
-		dl_last.c \
-		dl_new.c \
-		dl_size.c \
+	  					 dl_add_back.c \
+						 dl_clear_one.c \
+						 dl_clear.c \
+						 dl_find_content.c \
+						 dl_last.c \
+						 dl_new.c \
+						 dl_size.c \
 	  ) \
 	  $(addprefix ./t_li/, \
-	  	li_add_back.c \
-		li_clear_one.c \
-		li_clear.c \
-		li_find_content.c \
-		li_last.c \
-		li_new.c \
-		li_size.c \
+						 li_add_back.c \
+						 li_clear_one.c \
+						 li_clear.c \
+						 li_find_content.c \
+						 li_last.c \
+						 li_new.c \
+						 li_size.c \
+	  ) \
+	  $(addprefix ./ft_printf/, \
+							  ft_putchar.c \
+							  ft_putchar_hexa.c \
+							  ft_putchar_hexa_cap.c \
+							  ft_putnbr_hexa.c \
+							  ft_putnbr_hexa_cap.c \
+							  ft_putnbr_int.c \
+							  ft_putnbr_unsigned.c \
+							  ft_putstr.c \
+							  ft_putstr_printf.c \
+							  ft_idconv_c.c \
+							  ft_idconv_d_i.c \
+							  ft_idconv_p.c \
+							  ft_idconv_s.c \
+							  ft_idconv_u.c \
+							  ft_idconv_x.c \
+							  ft_idconv_x_cap.c \
+							  ft_convselect.c \
+							  ft_convchr.c \
+							  ft_datazero.c \
+							  ft_printf.c \
 	  ) \
 
 BNS = ./ft_lstnew.c \
@@ -91,21 +113,20 @@ OBJBNS = $(BNS:.c=.o)
 all: $(NAME) $(HEADERS)
 
 %.o : %.c
-	$(CC) $(CFLAGS) -Ift_printf -o $@ -c $<
+	$(CC) $(CFLAGS) -o $@ -c $<
 
 $(NAME): $(OBJ)
-	cd ./ft_printf; make
-	ar rc $@ libft.h $^
+	ar rc $@ $^
+	ranlib $(NAME)
 
 bonus: $(OBJ) $(OBJBNS)
-	ar rc -Lft_printf -lftprintf $(NAME) libft.h $^
+	ar rc $(NAME) $^
+	ranlib $(NAME)
 
 clean:
-	cd ./ft_printf; make clean
 	rm -f $(OBJ) $(OBJBNS)
 
 fclean: clean
-	cd ./ft_printf; make fclean
 	rm -f $(NAME)
 
 re: fclean all

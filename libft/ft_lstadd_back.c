@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tda-silv <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 16:18:44 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/03/21 09:13:42 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/10/25 15:14:13 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*copyl;
 
-	if (lst)
+	if (lst && new)
 	{
 		if (!*lst)
 			*lst = new;

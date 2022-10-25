@@ -6,29 +6,27 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:27:35 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/10/24 19:23:30 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/10/25 18:43:42 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
-#include "stdio.h"
-#include "unistd.h"
+#include "../include/header.h"
 
 #define L 1480
 #define H 920
 #define SQUARE_X 30
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void	my_mlx_pixel_put(t_data_mlximg *data, int x, int y, int color);
 float	my_abs(float nb);
-void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data *img);
+void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_mlximg *img);
 float	rotate_pixel_x(int Ox, int Oy, int Mx, int My);
 float	rotate_pixel_y(int Ox, int Oy, int Mx, int My);
 
 int	main(void)
 {
-	void	*mlx;
-	void	*mlx_win;
-	t_data	img;
+	void			*mlx;
+	void			*mlx_win;
+	t_data_mlximg	img;
 	
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, L, H, "test");
@@ -79,7 +77,7 @@ int	main(void)
 	return (0);
 }
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	my_mlx_pixel_put(t_data_mlximg *data, int x, int y, int color)
 {
 	char	*dst;
 
@@ -95,7 +93,7 @@ float	my_abs(float nb)
 		return (nb);
 }
 
-void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data *img)
+void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_mlximg *img)
 {
 	int	dx;
 	int	dy;

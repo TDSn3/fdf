@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 18:27:51 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/10/24 21:05:09 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/10/25 15:09:10 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <stddef.h>
 # include <fcntl.h>
+# include "./ft_printf/ft_printf.h"
 # include "./get_next_line/get_next_line_bonus.h"
 # include "./t_li/t_li.h"
 # include "./t_dl/t_dl.h"

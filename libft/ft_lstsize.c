@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tda-silv <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 13:59:36 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/03/16 17:12:28 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/10/25 15:19:20 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,13 @@ int	ft_lstsize(t_list *lst)
 
 	i = 0;
 	nextl = lst;
-	while (nextl)
+	if (lst)
 	{
-		nextl = nextl->next;
-		i++;
+		while (nextl)
+		{
+			nextl = nextl->next;
+			i++;
+		}
 	}
 	return (i);
 }

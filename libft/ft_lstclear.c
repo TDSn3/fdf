@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tda-silv <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:19:08 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/03/19 17:47:46 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/10/25 15:17:07 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,18 @@ void	ft_lstclear(t_list **lst, void (*del)(void*))
 	t_list	*copyl;
 
 	copyl = *lst;
-	while (copyl)
+	if (lst)
 	{
-		*lst = copyl->next;
-		(*del)(copyl->content);
-		free(copyl);
-		copyl = *lst;
+		while (copyl)
+		{
+			*lst = copyl->next;
+			if (del)
+				(*del)(copyl->content);
+			free(copyl);
+			copyl = *lst;
+		}
+		*lst = NULL;
 	}
-	*lst = NULL;
 }
 /*
 #include <stdio.h>
