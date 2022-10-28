@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:27:35 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/10/26 14:35:19 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/10/28 04:37:07 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,14 @@ int	main(void)
 
 	fd = open(pathname, O_RDWR);
 	str = get_next_line(fd);
-	ft_printf("|%s", str);
-	free(str);
+	while (str)
+	{
+		printf("|%s", str);
+		if (str)
+			free(str);
+		str = get_next_line(fd);
+	}
+//	free(str);
 	close(fd);
 
 	rotate_all(1480, 920, 30, mlx, mlx_win, &img);
