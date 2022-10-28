@@ -6,11 +6,11 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 13:14:10 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/10/26 13:14:49 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/10/28 09:24:16 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/header.h"
+#include <header.h>
 
 void	my_mlx_pixel_put(t_data_mlximg *data, int x, int y, int color)
 {

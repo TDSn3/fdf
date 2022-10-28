@@ -6,11 +6,11 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 13:03:49 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/10/26 13:04:21 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/10/28 09:24:21 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/header.h"
+#include <header.h>
 
 float	rotate_pixel_x(int Ox, int Oy, int Mx, int My)
 {

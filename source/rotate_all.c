@@ -6,11 +6,11 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 13:17:07 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/10/26 13:38:23 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/10/28 09:24:18 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/header.h"
+#include <header.h>
 
 void	rotate_all(float L, float H, float SQUARE_X, void *mlx, void *mlx_win, t_data_mlximg *img)
 {
