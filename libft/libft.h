@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 18:27:51 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/10/25 15:09:10 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/10/30 10:20:39 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "./get_next_line/get_next_line_bonus.h"
 # include "./t_li/t_li.h"
 # include "./t_dl/t_dl.h"
+# include "./my.h"
 
 typedef struct s_list
 {
@@ -71,6 +72,5 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-char	*my_strjoin_free(char **s1, char **s2);
 
 #endif

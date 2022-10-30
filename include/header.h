@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:29:18 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/10/28 09:23:24 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/10/30 14:06:05 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ float	rotate_pixel_x(int Ox, int Oy, int Mx, int My);
 float	rotate_pixel_y(int Ox, int Oy, int Mx, int My);
 void	rotate_all(float L, float H, float SQUARE_X, void *mlx, void *mlx_win, t_data_mlximg *img);
 int     width_tab(char *str);
+void	setup_struct(t_data_util *d);
 
 #endif
