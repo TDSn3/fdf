@@ -6,7 +6,7 @@
 #    By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/17 14:32:32 by tda-silv          #+#    #+#              #
-#    Updated: 2022/10/30 14:06:20 by tda-silv         ###   ########.fr        #
+#    Updated: 2022/10/30 16:46:40 by tda-silv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,8 @@ SRC = $(addprefix ./source/, \
 						   my_mlx_pixel_put.c \
 						   width_tab.c \
 						   setup_struct.c \
+						   setup_tab.c \
+						   setup_hw_tab.c \
 	  ) \
 
 OBJ = $(SRC:.c=.o)
