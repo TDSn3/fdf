@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:27:35 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/10/30 17:35:57 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/10/31 09:04:48 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,22 @@ int	main(void)
 	d.win_height = 920;
 	d.square_size = 30;
 	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, d.win_widht, d.win_height, "test");
+	mlx_win = mlx_new_window(mlx, d.win_widht, d.win_height, "fdf");
 	img.img = mlx_new_image(mlx, d.win_widht, d.win_height);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
+
+////
+	for (int x = 0; x < d.win_widht; x++)
+	{
+		for (int y = 0; y < d.win_height; y++)
+		{
+			if (y * y < ((d.win_widht - x) * ((d.win_widht - y) - x)))
+				my_mlx_pixel_put(&img, x, y, 0x001d1e20 / ((y + 90) * (x + 90)));
+			else
+				my_mlx_pixel_put(&img, x, y, 0x001d1e20 / ((d.win_height - y + 90) * ( d.win_widht - x + 90)));
+		}
+	}
+////
 
 	if (setup_tab(&d, "mlx_util/maps/test_maps/basictest.fdf"))
 		return (1);
