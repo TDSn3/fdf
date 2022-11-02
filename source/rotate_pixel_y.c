@@ -6,15 +6,16 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 13:04:42 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/10/28 09:24:24 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/02 17:46:34 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <header.h>
 
-float	rotate_pixel_y(int Ox, int Oy, int Mx, int My)
+float	rotate_pixel_y(int Ox, int Oy, int Mx, int My, t_data_util *d, int i, int j)
 {
 	float	xM, yM, x, y, angle;
+
 	angle = 45 * M_PI / 180;
 	xM = Mx - Ox; 
 	yM = My - Oy;
@@ -23,5 +24,5 @@ float	rotate_pixel_y(int Ox, int Oy, int Mx, int My)
 		y = y + ((Oy - y) * 0.42);
 	else
 		y = y - ((y - Oy) * 0.42);
-	return (y);
+	return (y -= d->tab_hw[i][j] * 2);
 }
