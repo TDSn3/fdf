@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 15:15:01 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/02 16:38:23 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/02 20:39:53 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,32 +55,34 @@ int	setup_tab(t_data_util *d, const char *pathname)
 		return (1);
 	}
 	str = get_next_line(fd);
-	while (str && y_tab < d->tab_height)
+	while (str && x_tab < d->tab_height)
 	{
-		while (x_tab < d->tab_widht && str[x_str])
+		while (y_tab < d->tab_widht && str[x_str])
 		{
 			if (str[x_str] && ((str[x_str] >= '0' && str[x_str] <= '9') || str[x_str] == '-'))
 			{
-				d->tab_hw[y_tab][x_tab] = ft_atoi(str + x_str);
-				d->tab_color[y_tab][x_tab] = 0x00FFFFFF - d->tab_hw[y_tab][x_tab];
+//				printf("%d ", ft_atoi(str + x_str));
+				d->tab_hw[x_tab][y_tab] = ft_atoi(str + x_str);
+				d->tab_color[x_tab][y_tab] = 0x00FFFFFF - d->tab_hw[x_tab][y_tab];
 				while (str[x_str] && ((str[x_str] >= '0' && str[x_str] <= '9') || str[x_str] == '-' || str[x_str] == ','))
 				{
 					if (str[x_str] == ',')
 					{
-						d->tab_color[y_tab][x_tab] = my_atoi_hex(str + (++x_str));
+						d->tab_color[x_tab][y_tab] = my_atoi_hex(str + (++x_str));
 						color_specified(d, str, &x_str);
 						continue ;
 					}
 					x_str++;
 				}
-				x_tab++;
+				y_tab++;
 				continue ;
 			}
 			x_str++;
 		}
+//		printf("\n");
 		x_str = 0;
-		x_tab = 0;
-		y_tab++;
+		y_tab = 0;
+		x_tab++;
 		if (str)
 			free(str);
 		str = get_next_line(fd);

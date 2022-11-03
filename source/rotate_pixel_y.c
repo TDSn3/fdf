@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate_pixel_y.c                                   :+:      :+:    :+:   */
+/*   rotate_pixel_x.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/26 13:04:42 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/02 17:46:34 by tda-silv         ###   ########.fr       */
+/*   Created: 2022/10/26 13:03:49 by tda-silv          #+#    #+#             */
+/*   Updated: 2022/11/03 10:18:45 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ float	rotate_pixel_y(int Ox, int Oy, int Mx, int My, t_data_util *d, int i, int 
 	angle = 45 * M_PI / 180;
 	xM = Mx - Ox; 
 	yM = My - Oy;
-	y = - xM * sinf(angle) + yM * cosf(angle) + Oy;
-	if (My < Oy)
-		y = y + ((Oy - y) * 0.42);
+	x = xM * cosf(angle) + yM * sinf(angle) + Ox;
+	if (Mx < Ox)
+		x = x + ((Ox - x) * 0.42);
 	else
-		y = y - ((y - Oy) * 0.42);
-	return (y -= d->tab_hw[i][j] * 2);
+		x = x - ((x - Ox) * 0.42);
+	return (x -= d->tab_hw[i][j] * 2);
 }

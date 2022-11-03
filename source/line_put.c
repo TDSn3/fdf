@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:31:58 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/02 17:31:19 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/03 11:23:14 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 	dx = x2 - x1;
 	dy = y2 - y1;
 	color1 = d->tab_color[i][j];
-	color2 = d->tab_color[i2][j2];
+//	color2 = d->tab_color[i2][j2];
 	my_mlx_pixel_put(img, x1, y1, color1);
 	my_mlx_pixel_put(img, x2, y2, color2);
-	dif = (color1 - color2) / (x2 - x1);
+//	dif = (color1 - color2) / (x2 - x1);
 	if (dx != 0)
 	{
 		if (dx > 0)
@@ -43,8 +43,8 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 						dy = dy * 2;
 						while (x1 < x2)
 						{
+							color1 = d->tab_color[i][j];
 							my_mlx_pixel_put(img, x1, y1, color1);
-							color1 -= (x2 - x1);
 							x1++;
 							e = e - dy;
 							if (e < 0)
@@ -61,8 +61,8 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 						dy = e * 2;
 						while (x1 < x2)
 						{
+							color1 = d->tab_color[i][j];
 							my_mlx_pixel_put(img, x1, y1, color1);
-							color1 -= (x2 - x1);
 							y1++;
 							e = e - dx;
 							if (e < 0)
@@ -82,8 +82,8 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 						dy = dy * 2;
 						while (x1 < x2)
 						{
+							color1 = d->tab_color[i][j];
 							my_mlx_pixel_put(img, x1, y1, color1);
-							color1 -= (x2 - x1);
 							x1++;
 							e = e + dy;
 							if (e < 0)
@@ -100,8 +100,8 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 						dy = e * 2;
 						while (x1 < x2)
 						{
+							color1 = d->tab_color[i][j];
 							my_mlx_pixel_put(img, x1, y1, color1);
-							color1 -= (x2 - x1);
 							y1--;
 							e = e + dx;
 							if (e > 0)
@@ -117,8 +117,8 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 			{
 				while (x1 < x2)
 				{
+					color1 = d->tab_color[i][j];
 					my_mlx_pixel_put(img, x1, y1, color1);
-					color1 -= (x2 - x1);
 					x1++;
 				}
 			}
@@ -136,8 +136,8 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 						dy = dy * 2;
 						while (x1 > x2)
 						{
+							color1 = d->tab_color[i][j];
 							my_mlx_pixel_put(img, x1, y1, color1);
-							color1 -= (x2 - x1);
 							x1--;
 							e = e + dy;
 							if (e >= 0)
@@ -154,8 +154,8 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 						dy = e * 2;
 						while (x1 > x2)
 						{
+							color1 = d->tab_color[i][j];
 							my_mlx_pixel_put(img, x1, y1, color1);
-							color1 -= (x2 - x1);
 							y1++;
 							e = e + dx;
 							if (e <= 0)
@@ -175,8 +175,8 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 						dy = dy * 2;
 						while (x1 > x2)
 						{
+							color1 = d->tab_color[i][j];
 							my_mlx_pixel_put(img, x1, y1, color1);
-							color1 -= (x2 - x1);
 							x1--;
 							e = e - dy;
 							if (e >= 0)
@@ -193,8 +193,8 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 						dy = e * 2;
 						while (x1 > x2)
 						{
+							color1 = d->tab_color[i][j];
 							my_mlx_pixel_put(img, x1, y1, color1);
-							color1 -= (x2 - x1);
 							y1--;
 							e = e - dx;
 							if (e >= 0)
@@ -210,8 +210,8 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 			{
 				while (x1 > x2)
 				{
+					color1 = d->tab_color[i][j];
 					my_mlx_pixel_put(img, x1, y1, color1);
-					color1 -= (x2 - x1);
 					x1--;
 				}
 			}
@@ -225,8 +225,8 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 			{
 				while (y1 < y2)
 				{
+					color1 = d->tab_color[i][j];
 					my_mlx_pixel_put(img, x1, y1, color1);
-					color1 -= (x2 - x1);
 					y1++;
 				}
 			}
@@ -234,8 +234,8 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 			{
 				while (y1 > y2)
 				{
+					color1 = d->tab_color[i][j];
 					my_mlx_pixel_put(img, x1, y1, color1);
-					color1 -= (x2 - x1);
 					y1--;
 				}
 			}
