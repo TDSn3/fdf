@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 06:00:53 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/10/28 09:24:27 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/03 14:28:07 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ int width_tab(char *str)
 			width++;
 			continue ;
 		}
-		else
-			return (-1);
 		i++;
 	}
 	return (width);

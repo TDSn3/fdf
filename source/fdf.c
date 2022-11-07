@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:27:35 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/02 14:15:48 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/07 21:46:56 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(void)
 	setup_struct(&d);
 	d.win_widht = 1480;
 	d.win_height = 920;
-	d.square_size = 30;
+	d.square_size = 5;
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, d.win_widht, d.win_height, "fdf");
 	img.img = mlx_new_image(mlx, d.win_widht, d.win_height);
@@ -42,8 +42,15 @@ int	main(void)
 	}
 ////
 
-	if (setup_tab(&d, "mlx_util/maps/test_maps/42.fdf"))
+	if (setup_tab(&d, "mlx_util/maps/test_maps/pyra.fdf"))
 		return (1);
+
+	printf("widht = %d  height = %d\n", d.tab_widht, d.tab_height);
+	if (d.win_widht > d.tab_height)
+		d.square_size = d.win_widht / (d.tab_widht * 1.5);
+	else
+		d.square_size = d.win_height / (d.tab_height * 1.5);
+
 	rotate_all(&d, mlx, mlx_win, &img);
 
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
