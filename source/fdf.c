@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:27:35 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/07 21:46:56 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/09 14:58:46 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(void)
 	setup_struct(&d);
 	d.win_widht = 1480;
 	d.win_height = 920;
-	d.square_size = 5;
+	d.square_size = 1;
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, d.win_widht, d.win_height, "fdf");
 	img.img = mlx_new_image(mlx, d.win_widht, d.win_height);
@@ -42,7 +42,7 @@ int	main(void)
 	}
 ////
 
-	if (setup_tab(&d, "mlx_util/maps/test_maps/pyra.fdf"))
+	if (setup_tab(&d, "mlx_util/maps/test_maps/42.fdf"))
 		return (1);
 
 	printf("widht = %d  height = %d\n", d.tab_widht, d.tab_height);

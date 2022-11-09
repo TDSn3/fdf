@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 13:17:07 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/03 14:40:41 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/09 12:00:35 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@ void	rotate_all(t_data_util *d, void *mlx, void *mlx_win, t_data_mlximg *img)
 	int j = 0;
 	float w = d->tab_widht;
 	float h = d->tab_height;
+	int	win_h_div = ((float)(d->win_height) / 2) + 0.5;
+	int	win_w_div = ((float)(d->win_widht) / 2) + 0.5;
+	int	x_o;
+	int	y_o;
+	int	x_next;
+	int	y_next;
+	
 //	printf("tab_height = %d, tab_widht = %d\n", d->tab_height,d->tab_widht);
 
 	while (i < h)
@@ -25,17 +32,22 @@ void	rotate_all(t_data_util *d, void *mlx, void *mlx_win, t_data_mlximg *img)
 		while (j < w)
 		{
 //			printf("[%d][%d] %d\n", i, j, d->tab_hw[i][j]);
+			x_o = win_h_div - (((h / 2) + 0.5) * d->square_size) + (i * d->square_size);
+			y_o = win_w_div - (((w / 2) + 0.5) * d->square_size) + (j * d->square_size);
+			x_next = win_h_div - (((h / 2) + 0.5) * d->square_size) + ((i + 1) * d->square_size);
+			y_next = win_w_div - (((w / 2) + 0.5) * d->square_size) + ((j + 1) * d->square_size);
+
 			if (i + 1 < h)
-				line_put(rotate_pixel_x(d->win_height / 2,	d->win_widht / 2, 	(d->win_height /2 - ((h / 2) * d->square_size) + (i * d->square_size)), 		   (d->win_widht /2 - ((w / 2) * d->square_size) + (j * d->square_size)), d, i, j),
-						 rotate_pixel_y(d->win_height / 2,	d->win_widht / 2, 	(d->win_height /2 - ((h / 2) * d->square_size) + (i * d->square_size)), 		   (d->win_widht /2 - ((w / 2) * d->square_size) + (j * d->square_size)), d, i, j) + (d->square_size / 2),
-						 rotate_pixel_x(d->win_height / 2,	d->win_widht / 2, 	 d->win_height /2 - ((h / 2) * d->square_size) + ((i + 1) * d->square_size),    	d->win_widht /2 - ((w / 2) * d->square_size) + (j * d->square_size),d , i + 1, j),
-						 rotate_pixel_y(d->win_height / 2,	d->win_widht / 2, 	 d->win_height /2 - ((h / 2) * d->square_size) + ((i + 1) * d->square_size), 	    d->win_widht /2 - ((w / 2) * d->square_size) + (j * d->square_size),d , i + 1, j) + (d->square_size / 2),
+				line_put(rotate_pixel_x(win_h_div,	win_w_div,	x_o, 	y_o, d, i, j),
+						 rotate_pixel_y(win_h_div,	win_w_div,	x_o, 	y_o, d, i, j) + (d->square_size / 2),
+						 rotate_pixel_x(win_h_div,	win_w_div,	x_next,	y_o, d , i + 1, j),
+						 rotate_pixel_y(win_h_div,	win_w_div,	x_next,	y_o, d , i + 1, j) + (d->square_size / 2),
 						 mlx, mlx_win, img, d, i, j, i + 1, j);
 			if (j + 1 < w)
-				line_put(rotate_pixel_x(d->win_height / 2, d->win_widht / 2, 	(d->win_height /2 - ((h / 2) * d->square_size) + (i * d->square_size)), 		   (d->win_widht /2 - ((w / 2) * d->square_size) + (j * d->square_size)),d, i, j),
-						 rotate_pixel_y(d->win_height / 2, d->win_widht / 2, 	(d->win_height /2 - ((h / 2) * d->square_size) + (i * d->square_size)), 		   (d->win_widht /2 - ((w / 2) * d->square_size) + (j * d->square_size)),d, i, j) + (d->square_size / 2),
-						 rotate_pixel_x(d->win_height / 2, d->win_widht / 2, 	(d->win_height /2 - ((h / 2) * d->square_size) + (i * d->square_size)), 		    d->win_widht /2 - ((w / 2) * d->square_size) + ((j + 1) * d->square_size),d, i, j + 1),
-						 rotate_pixel_y(d->win_height / 2, d->win_widht / 2, 	(d->win_height /2 - ((h / 2) * d->square_size) + (i * d->square_size)), 		    d->win_widht /2 - ((w / 2) * d->square_size) + ((j + 1) * d->square_size),d, i, j + 1) + (d->square_size / 2),
+				line_put(rotate_pixel_x(win_h_div,	win_w_div,	x_o,	y_o,d, i, j),
+						 rotate_pixel_y(win_h_div,	win_w_div,	x_o,	y_o,d, i, j) + (d->square_size / 2),
+						 rotate_pixel_x(win_h_div,	win_w_div,	x_o,	y_next,d, i, j + 1),
+						 rotate_pixel_y(win_h_div,	win_w_div,	x_o,	y_next,d, i, j + 1) + (d->square_size / 2),
 						 mlx, mlx_win, img, d, i, j, i, j + 1);
 			j++;
 		}

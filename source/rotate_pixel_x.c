@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 13:04:42 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/03 10:27:57 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/09 15:44:49 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ float	rotate_pixel_x(int Ox, int Oy, int Mx, int My, t_data_util *d, int i, int 
 {
 	float	xM, yM, x, y, angle;
 
-	angle = 45 * M_PI / 180;
+	angle = -45 * M_PI / 180;
 	xM = Mx - Ox; 
 	yM = My - Oy;
 	y = - xM * sinf(angle) + yM * cosf(angle) + Oy;
