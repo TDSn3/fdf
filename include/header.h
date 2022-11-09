@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:29:18 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/03 10:08:00 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/09 18:06:47 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ int		width_tab(char *str);
 void	setup_struct(t_data_util *d);
 int		setup_tab(t_data_util *d, const char *pathname);
 int		setup_hw_tab(t_data_util *d, const char *pathname);
+t_li    *nb_nb_point(t_data_util *d);
 
 #endif

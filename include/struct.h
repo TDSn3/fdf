@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 15:11:18 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/10/30 13:59:00 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/09 18:08:25 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,14 @@ typedef struct	s_data_mlximg
 
 typedef struct	s_data_util
 {
-	int	win_widht;
-	int	win_height;
-	int square_size;
-	int	tab_widht;
-	int	tab_height;
-	int	**tab_hw;
-	int	**tab_color;
+	int		win_widht;
+	int		win_height;
+	int 	square_size;
+	int		tab_widht;
+	int		tab_height;
+	int		**tab_hw;
+	int		**tab_color;
+	t_li	*li_color;
 }	t_data_util;
 
 #endif

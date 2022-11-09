@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 15:15:01 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/03 14:42:26 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/09 17:34:27 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	setup_tab(t_data_util *d, const char *pathname)
 			if (str[x_str] && ((str[x_str] >= '0' && str[x_str] <= '9') || str[x_str] == '-'))
 			{
 				d->tab_hw[x_tab][y_tab] = ft_atoi(str + x_str);
-				d->tab_color[x_tab][y_tab] = 0x00FFFFFF - d->tab_hw[x_tab][y_tab];
+				d->tab_color[x_tab][y_tab] = -1;
 				while (str[x_str] && ((str[x_str] >= '0' && str[x_str] <= '9') || str[x_str] == '-' || str[x_str] == ','))
 				{
 					if (str[x_str] == ',')

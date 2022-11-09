@@ -6,7 +6,7 @@
 #    By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/17 14:32:32 by tda-silv          #+#    #+#              #
-#    Updated: 2022/11/09 11:11:45 by tda-silv         ###   ########.fr        #
+#    Updated: 2022/11/09 17:42:05 by tda-silv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRC = $(addprefix ./source/, \
 						   setup_struct.c \
 						   setup_tab.c \
 						   setup_hw_tab.c \
+						   nb_nb_point.c \
 	  ) \
 
 OBJ = $(SRC:.c=.o)
