@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 10:59:24 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/10 10:46:43 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/10 19:51:22 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_dl	*dl_new(int content)
 	new_dl = malloc(sizeof(t_dl));
 	if (!new_dl)
 		return (NULL);
-	new_li = li_new(-1, -1, -1);
+	new_li = li_new(-1, -1);
 	if (!new_li)
 		return (NULL);
 	new_dl->next_li = new_li;

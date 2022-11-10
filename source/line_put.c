@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:31:58 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/09 17:43:44 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/10 22:53:56 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,33 +17,49 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 	int	dx;
 	int	dy;
 	int	e;
-	int color1;
-	int color2;
-	float	dif;
+	int color1_R;
+	int color1_V;
+	int color1_B;
+
+	int color2_R;
+	int color2_V;
+	int color2_B;
+
+	int color;
+
+	float	dif_R;
+	float	dif_V;
+	float	dif_B;
+
 
 	dx = x2 - x1;
 	dy = y2 - y1;
 
-	if (d->tab_color[i][j] > -1)
-		color1 = d->tab_color[i][j];
-	else
-	{
-		
-	}
-	if (d->tab_color[i2][j2] > -1)
-		color2 = d->tab_color[i2][j2];
-	else
-	{
-		
-	}
+	color1_R = (d->tab_color[i][j] >> 16) % 256;
+	color1_V = (d->tab_color[i][j] >> 8) % 256;
+	color1_B = (d->tab_color[i][j]) % 256;
+//	printf("%d - R:%d V:%d B:%d\n",d->tab_color[i][j], color1_R, color1_V, color1_B);
 
-	if (color1 < color2)
-		color1 = color1 - 0x000000ff;
+	color2_R = (d->tab_color[i2][j2] >> 16) % 256;
+	color2_V = (d->tab_color[i2][j2] >> 8) % 256;
+	color2_B = (d->tab_color[i2][j2]) % 256;
+
+//	if (color1 < color2)
+//		color1 = color1 - 0x000000ff;
 //	printf("%x  %x  |  %d  %d  |  x1 = %d  x2 = %d\n", color1, color2, color1, color2, x1, x2);
-	my_mlx_pixel_put(img, x1, y1, color1);
-	my_mlx_pixel_put(img, x2, y2, color2);
-	dif = (float)(color2 - color1) / (float)(x2 - x1);
-	float	dif_i = dif;
+
+	color = (color1_R << 16) + (color1_V << 8) + (color1_B);
+	my_mlx_pixel_put(img, x1, y1, color);
+	color = (color2_R << 16) + (color2_V << 8) + (color2_B);
+	my_mlx_pixel_put(img, x2, y2, color);
+	dif_R = (float)(color2_R - color1_R) / (float)(x2 - x1);
+	dif_V = (float)(color2_V - color1_V) / (float)(x2 - x1);
+	dif_B = (float)(color2_B - color1_B) / (float)(x2 - x1);
+
+	float	dif_iR = dif_R;
+	float	dif_iV = dif_V;
+	float	dif_iB = dif_B;
+
 //	printf("dif = %f\n", dif);
 	if (dx != 0)
 	{
@@ -60,7 +76,8 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 						dy = dy * 2;
 						while (x1 < x2)
 						{
-							my_mlx_pixel_put(img, x1, y1, 0x00aa00aa);
+							color = ((color1_R + (int)(dif_iR + 0.5)) << 16) + ((color1_V  + (int)(dif_iV + 0.5)) << 8) + (color1_B + (int)(dif_iB + 0.5));
+							my_mlx_pixel_put(img, x1, y1, color);
 							x1++;
 							e = e - dy;
 							if (e < 0)
@@ -68,6 +85,9 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 								y1++;
 								e = e + dx;
 							}
+							dif_iR = dif_iR + dif_R;
+							dif_iV = dif_iV + dif_V;
+							dif_iB = dif_iB + dif_B;
 						}
 					}
 					else // dx < dy // octant 7
@@ -78,14 +98,17 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 						while (x1 < x2)
 						{
 //							printf("dif_i = %d\n", (int)(dif_i + 0.5));
-							my_mlx_pixel_put(img, x1, y1, color1 + (int)(dif_i + 0.5));
+							color = ((color1_R + (int)(dif_iR + 0.5)) << 16) + ((color1_V  + (int)(dif_iV + 0.5)) << 8) + (color1_B + (int)(dif_iB + 0.5));
+							my_mlx_pixel_put(img, x1, y1, color);
 							y1++;
 							e = e - dx;
 							if (e < 0)
 							{
 								x1++;
 								e = e + dy;
-								dif_i = dif_i + dif;
+								dif_iR = dif_iR + dif_R;
+								dif_iV = dif_iV + dif_V;
+								dif_iB = dif_iB + dif_B;
 							}
 						}
 					}
@@ -99,7 +122,8 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 						dy = dy * 2;
 						while (x1 < x2)
 						{
-							my_mlx_pixel_put(img, x1, y1, 0x00aa00aa);
+							color = ((color1_R + (int)(dif_iR + 0.5)) << 16) + ((color1_V  + (int)(dif_iV + 0.5)) << 8) + (color1_B + (int)(dif_iB + 0.5));
+							my_mlx_pixel_put(img, x1, y1, color);
 							x1++;
 							e = e + dy;
 							if (e < 0)
@@ -107,6 +131,9 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 								y1--;
 								e = e + dx;
 							}
+							dif_iR = dif_iR + dif_R;
+							dif_iV = dif_iV + dif_V;
+							dif_iB = dif_iB + dif_B;
 						}
 					}
 					else // dx < -dy // octant 2
@@ -116,13 +143,17 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 						dy = e * 2;
 						while (x1 < x2)
 						{
-							my_mlx_pixel_put(img, x1, y1, 0x00aa00aa);
+							color = ((color1_R + (int)(dif_iR + 0.5)) << 16) + ((color1_V  + (int)(dif_iV + 0.5)) << 8) + (color1_B + (int)(dif_iB + 0.5));
+							my_mlx_pixel_put(img, x1, y1, color);
 							y1--;
 							e = e + dx;
 							if (e > 0)
 							{
 								x1++;
 								e = e + dy;
+								dif_iR = dif_iR + dif_R;
+								dif_iV = dif_iV + dif_V;
+								dif_iB = dif_iB + dif_B;
 							}
 						}
 					}
@@ -132,8 +163,12 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 			{
 				while (x1 < x2)
 				{
-					my_mlx_pixel_put(img, x1, y1, 0x00aa00aa);
+					color = ((color1_R + (int)(dif_iR + 0.5)) << 16) + ((color1_V  + (int)(dif_iV + 0.5)) << 8) + (color1_B + (int)(dif_iB + 0.5));
+					my_mlx_pixel_put(img, x1, y1, color);
 					x1++;
+					dif_iR = dif_iR + dif_R;
+					dif_iV = dif_iV + dif_V;
+					dif_iB = dif_iB + dif_B;
 				}
 			}
 		}

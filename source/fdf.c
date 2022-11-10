@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:27:35 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/09 18:08:50 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/10 18:35:58 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ int	main(void)
 	else
 		d.square_size = d.win_height / (d.tab_height * 1.5);
 
-	rotate_all(&d, mlx, mlx_win, &img);
 	d.li_color = nb_nb_point(&d);
+	rotate_all(&d, mlx, mlx_win, &img);
 
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
 	mlx_loop(mlx);
