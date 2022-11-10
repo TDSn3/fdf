@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 08:58:51 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/10/24 20:49:52 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/10 10:44:36 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	li_clear_one(t_li **lst, int content)
 		li_clear(lst);
 		return ;
 	}	
-	while (li_cpy && li_cpy->content != content)
+	while (li_cpy && li_cpy->content_one != content)
 		li_cpy = li_cpy->next;
-	if (li_cpy->content == content)
+	if (li_cpy->content_one == content)
 	{
 		if (li_cpy->prev)
 			li_cpy->prev->next = li_cpy->next;

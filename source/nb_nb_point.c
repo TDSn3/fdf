@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:39:07 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/09 18:13:25 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/10 10:55:08 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_li *nb_nb_point(t_data_util *d)
 	j = 0;
 	one_zero = 0;
 	li = NULL;
-	li_add_back(&li, li_new(d->tab_hw[i][j]));
+	li_add_back(&li, li_new(d->tab_hw[i][j], -1, -1));
 //	printf("\n%d add\n", d->tab_hw[i][j]);
 	if (d->tab_hw[i][j] == 0)
 		one_zero++;
@@ -33,12 +33,12 @@ t_li *nb_nb_point(t_data_util *d)
 		{
 			if (li_find_content(li, d->tab_hw[i][j]) == 0 && d->tab_hw[i][j] != 0)
 			{
-				li_add_back(&li, li_new(d->tab_hw[i][j]));
+				li_add_back(&li, li_new(d->tab_hw[i][j], -1, -1));
 //				printf("\n%d add\n", d->tab_hw[i][j]);
 			}
 			if (li_find_content(li, d->tab_hw[i][j]) == 0 && d->tab_hw[i][j] == 0 && one_zero == 0)
 			{
-				li_add_back(&li, li_new(d->tab_hw[i][j]));
+				li_add_back(&li, li_new(d->tab_hw[i][j], -1, -1));
 //				printf("\n%d add\n", d->tab_hw[i][j]);
 				one_zero++;				
 			}
@@ -50,11 +50,10 @@ t_li *nb_nb_point(t_data_util *d)
 		i++;
 	}
 
-	int	li_size;
+	int	list_size;
 
-	li_size = li_size(li);
-	printf("size li = %d\n", li_size);
-
+	list_size = li_size(li);
+	printf("size li = %d\n", list_size);
 
 	return (li);
 }
