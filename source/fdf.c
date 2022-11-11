@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:27:35 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/11 11:54:16 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/11 16:59:42 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(void)
 	setup_struct(&d);
 	d.win_widht = 1480;
 	d.win_height = 920;
-	d.square_size = 1;
+	d.square_size = 10;
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, d.win_widht, d.win_height, "fdf");
 	img.img = mlx_new_image(mlx, d.win_widht, d.win_height);
@@ -48,7 +48,7 @@ int	main(void)
 		return (1);
 
 
-////
+////Square size
 	printf("widht = %d  height = %d ", d.tab_widht, d.tab_height);
 	if (d.win_widht > d.tab_height)
 		d.square_size = d.win_widht / (d.tab_widht * 2);
@@ -58,7 +58,7 @@ int	main(void)
 ////
 
 
-//	show_double_tab(&d);
+	show_double_tab(&d);
 	rotate_all(&d, mlx, mlx_win, &img);
 
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
@@ -88,11 +88,12 @@ void	show_double_tab(t_data_util *d)
 	{
 		while (j < d->tab_widht)
 		{
-			printf("%d ", d->tab_color[i][j]);
+//			printf("%d ", d->tab_hw[i][j]);
 			j++;
 		}
-		printf("\n");
+//		printf("\n");
 		j = 0;
 		i++;
+//		exit (1);
 	}
 }

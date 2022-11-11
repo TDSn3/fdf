@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 15:15:01 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/11 14:58:56 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/11 16:40:37 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,18 @@ int	setup_tab(t_data_util *d, const char *pathname)
 	str = get_next_line(fd);
 	while (str && x_tab < d->tab_height)
 	{
-		printf("%s\n", str);
+//		printf("%s\n", str);
 		while (y_tab < d->tab_widht && str[x_str])
 		{
 			if (str[x_str] && ((str[x_str] >= '0' && str[x_str] <= '9') || str[x_str] == '-'))
 			{
-				printf("%c", str[x_str]);
+//				printf("%c", str[x_str]);
 				d->tab_hw[x_tab][y_tab] = ft_atoi(str + x_str);
 				d->tab_color[x_tab][y_tab] = -1;
 
 				while (str[x_str] && ((str[x_str] >= '0' && str[x_str] <= '9') || str[x_str] == '-' || str[x_str] == ','))
 				{
-					printf("\033[36m%c\033[00m", str[x_str]);
+//					printf("\033[36m%c\033[00m", str[x_str]);
 					if (str[x_str] == ',')
 					{
 						comma = 1;
@@ -87,8 +87,8 @@ int	setup_tab(t_data_util *d, const char *pathname)
 	//		printf("\033[36m%c\033[00m", str[x_str]);
 			x_str++;
 		}
-		printf("\n");
-		exit (1);
+//		printf("\n");
+//		exit (1);
 		x_str = 0;
 		y_tab = 0;
 		x_tab++;

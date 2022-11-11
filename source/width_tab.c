@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 06:00:53 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/03 14:28:07 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/11 16:42:44 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int width_tab(char *str)
 	
 	i = 0;
 	width = 0;
+	while (str[i] && str[i] == ' ')
+		i++;
 	while (str[i])
 	{
 		if ((str[i] <= '9' && str[i] >= '0') || str[i] == '-' ||  str[i] == 'x' || str[i] == ',')
