@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 13:03:49 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/11 15:21:45 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/11 20:57:53 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,5 @@ float	rotate_pixel_y(int Ox, int Oy, int Mx, int My, t_data_util *d, int i, int 
 		x = x + ((Ox - x) * 0.42);
 	else
 		x = x - ((x - Ox) * 0.42);
-	return (x -= d->tab_hw[i][j] * 2);
+	return (x -= d->tab_hw[i][j] * 3);
 }

@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:31:58 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/10 23:19:19 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/11 20:48:03 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 						e = dy;
 						dx = dx * 2;
 						dy = e * 2;
-						while (x1 < x2)
+						while (x1 <= x2 && y1 <= y2)
 						{
 //							printf("dif_i = %d\n", (int)(dif_i + 0.5));
 							color = ((color1_R + (int)(dif_iR + 0.5)) << 16) + ((color1_V  + (int)(dif_iV + 0.5)) << 8) + (color1_B + (int)(dif_iB + 0.5));
@@ -110,9 +110,12 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 							{
 								x1++;
 								e = e + dy;
-								dif_iR = dif_iR + dif_R;
-								dif_iV = dif_iV + dif_V;
-								dif_iB = dif_iB + dif_B;
+								if (color < (color2_R << 16) + (color2_V << 8) + color2_B)
+								{
+									dif_iR = dif_iR + dif_R;
+									dif_iV = dif_iV + dif_V;
+									dif_iB = dif_iB + dif_B;
+								}
 							}
 						}
 					}
@@ -146,7 +149,7 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 						e = dy;
 						dx = dx * 2;
 						dy = e * 2;
-						while (x1 < x2)
+						while (x1 <= x2 && y1 >= y2)
 						{
 							color = ((color1_R + (int)(dif_iR + 0.5)) << 16) + ((color1_V  + (int)(dif_iV + 0.5)) << 8) + (color1_B + (int)(dif_iB + 0.5));
 							if (x1 > 0 && y1 > 0 && x1 < d->win_widht && y1 < d->win_height)
@@ -157,11 +160,15 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 							{
 								x1++;
 								e = e + dy;
-								dif_iR = dif_iR + dif_R;
-								dif_iV = dif_iV + dif_V;
-								dif_iB = dif_iB + dif_B;
+								if (color > ((color2_R << 16) + (color2_V << 8) + color2_B) - (((int)dif_R << 16) + ((int)dif_V << 8) + dif_B))
+								{
+									dif_iR = dif_iR + dif_R;
+									dif_iV = dif_iV + dif_V;
+									dif_iB = dif_iB + dif_B;
+								}
 							}
 						}
+//						printf("%d\n", (color2_R << 16) + (color2_V << 8) + color2_B);
 					}
 				}
 			}

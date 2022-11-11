@@ -6,11 +6,13 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 13:17:07 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/10 23:28:13 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/11 20:48:30 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <header.h>
+
+static void	show_double_tab(t_data_util *d);
 
 void	rotate_all(t_data_util *d, void *mlx, void *mlx_win, t_data_mlximg *img)
 {
@@ -26,7 +28,7 @@ void	rotate_all(t_data_util *d, void *mlx, void *mlx_win, t_data_mlximg *img)
 	int	y_next;
 	
 //	printf("tab_height = %d, tab_widht = %d\n", d->tab_height,d->tab_widht);
-
+/*
 	while (i < h)
 	{
 		while (j < w)
@@ -38,13 +40,13 @@ void	rotate_all(t_data_util *d, void *mlx, void *mlx_win, t_data_mlximg *img)
 			y_next = win_w_div - (((w / 2) + 0.5) * d->square_size) + ((j + 1) * d->square_size);
 
 			if (i + 1 < h)
-				line_put(rotate_pixel_x(win_h_div,	win_w_div,	x_o, 	y_o, d, i, j) + (d->square_size / 1),
+				line_put(rotate_pixel_x(win_h_div,	win_w_div,	x_o,	y_o, d, i, j) + (d->square_size / 1),
 						 rotate_pixel_y(win_h_div,	win_w_div,	x_o, 	y_o, d, i, j),
 						 rotate_pixel_x(win_h_div,	win_w_div,	x_next,	y_o, d , i + 1, j) + (d->square_size / 1),
 						 rotate_pixel_y(win_h_div,	win_w_div,	x_next,	y_o, d , i + 1, j),
 						 mlx, mlx_win, img, d, i, j, i + 1, j);
 			if (j + 1 < w)
-				line_put(rotate_pixel_x(win_h_div,	win_w_div,	x_o,	y_o,d, i, j) + (d->square_size / 1),
+				line_put(rotate_pixel_x(win_h_div,	win_w_div,	x_o,	y_o, d, i, j) + (d->square_size / 1),
 						 rotate_pixel_y(win_h_div,	win_w_div,	x_o,	y_o,d, i, j),
 						 rotate_pixel_x(win_h_div,	win_w_div,	x_o,	y_next,d, i, j + 1) + (d->square_size / 1),
 						 rotate_pixel_y(win_h_div,	win_w_div,	x_o,	y_next,d, i, j + 1),
@@ -55,6 +57,52 @@ void	rotate_all(t_data_util *d, void *mlx, void *mlx_win, t_data_mlximg *img)
 		j = 0;
 		i++;
 	}
+*/
+
+	i = 0;
+	j = 0;
+	while (i < h)
+	{
+		while (j < w)
+		{
+			x_o = win_h_div - (((h / 2) + 0.5) * d->square_size) + (i * d->square_size);
+			y_o = win_w_div - (((w / 2) + 0.5) * d->square_size) + (j * d->square_size);
+			x_next = win_h_div - (((h / 2) + 0.5) * d->square_size) + ((i + 1) * d->square_size);
+			y_next = win_w_div - (((w / 2) + 0.5) * d->square_size) + ((j + 1) * d->square_size);
+			
+			d->pos_x[i][j] = rotate_pixel_x(win_h_div,	win_w_div,	x_o, 	y_o, d, i, j),
+			d->pos_y[i][j] = rotate_pixel_y(win_h_div,	win_w_div,	x_o, 	y_o, d, i, j),
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+//	show_double_tab(d);
+
+	i = 0;
+	j = 0;
+	while (i < h)
+	{
+		while (j < w)
+		{
+			if (i + 1 < h)
+				line_put(d->pos_x[i][j] + (d->square_size / 1),
+						 d->pos_y[i][j],
+						 d->pos_x[i + 1][j] + (d->square_size / 1),
+						 d->pos_y[i + 1][j],
+						 mlx, mlx_win, img, d, i, j, i + 1, j);
+			if (j + 1 < w)
+				line_put(d->pos_x[i][j] + (d->square_size / 1),
+						 d->pos_y[i][j],
+						 d->pos_x[i][j + 1] + (d->square_size / 1),
+						 d->pos_y[i][j + 1],
+						 mlx, mlx_win, img, d, i, j, i, j + 1);
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+	
 }
 /*
 	while (i < w)
@@ -80,3 +128,23 @@ void	rotate_all(t_data_util *d, void *mlx, void *mlx_win, t_data_mlximg *img)
 		i++;
 	}
 */
+
+static void	show_double_tab(t_data_util *d)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	while (i < d->tab_height)
+	{
+		while (j < d->tab_widht)
+		{
+			printf("%d,%d  ", d->pos_x[i][j], d->pos_y[i][j]);
+			j++;
+		}
+		printf("\n");
+		j = 0;
+		i++;
+	}
+}
