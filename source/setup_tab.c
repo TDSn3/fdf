@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 15:15:01 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/11 16:40:37 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/11 18:41:38 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,28 @@ int	setup_tab(t_data_util *d, const char *pathname)
 	{
 		d->tab_color[i] = malloc(d->tab_widht * sizeof(int));
 		if (!d->tab_color[i])
+			return (1);	
+		i++;
+	}
+	i = 0;
+	d->pos_x = malloc(d->tab_height * sizeof(int*));
+	if (!d->pos_x)
+		return (1);
+	while (i < d->tab_height)
+	{
+		d->pos_x[i] = malloc(d->tab_widht * sizeof(int));
+		if (!d->pos_x[i])
+			return (1);	
+		i++;
+	}
+	i = 0;
+	d->pos_y = malloc(d->tab_height * sizeof(int*));
+	if (!d->pos_y)
+		return (1);
+	while (i < d->tab_height)
+	{
+		d->pos_y[i] = malloc(d->tab_widht * sizeof(int));
+		if (!d->pos_y[i])
 			return (1);	
 		i++;
 	}
