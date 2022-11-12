@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:27:35 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/12 22:42:20 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/12 23:20:32 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(void)
 	setup_struct(&d);
 	d.win_widht = 1480;
 	d.win_height = 920;
-	d.square_size = 10;
+	d.square_size = 1;
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, d.win_widht, d.win_height, "fdf");
 	img.img = mlx_new_image(mlx, d.win_widht, d.win_height);
@@ -136,6 +136,6 @@ int	test(t_vars *vars)
 
 int	test_2(t_vars *vars)
 {
-	printf("new image\n");
+//	printf("new image\n");
 	return (0);
 }

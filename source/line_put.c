@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:31:58 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/11 20:48:03 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/12 23:24:48 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 							{
 								x1++;
 								e = e + dy;
-								if (color < (color2_R << 16) + (color2_V << 8) + color2_B)
+								if (color > ((color2_R << 16) + (color2_V << 8) + color2_B) - (((int)dif_R << 16) + ((int)dif_V << 8) + dif_B))
 								{
 									dif_iR = dif_iR + dif_R;
 									dif_iV = dif_iV + dif_V;
@@ -160,7 +160,7 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 							{
 								x1++;
 								e = e + dy;
-								if (color > ((color2_R << 16) + (color2_V << 8) + color2_B) - (((int)dif_R << 16) + ((int)dif_V << 8) + dif_B))
+								if (color > ((color2_R << 16) + (color2_V << 8) + color2_B) /*- (((int)dif_R << 16) + ((int)dif_V << 8) + dif_B)*/)
 								{
 									dif_iR = dif_iR + dif_R;
 									dif_iV = dif_iV + dif_V;
@@ -201,7 +201,7 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 						{
 //							color1 = d->tab_color[i][j];
 							if (x1 > 0 && y1 > 0 && x1 < d->win_widht && y1 < d->win_height)
-								my_mlx_pixel_put(img, x1, y1, 0x00aa00aa);
+								my_mlx_pixel_put(img, x1, y1, 0x0000ff00);
 							x1--;
 							e = e + dy;
 							if (e >= 0)
@@ -220,7 +220,7 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 						{
 //							color1 = d->tab_color[i][j];
 							if (x1 > 0 && y1 > 0 && x1 < d->win_widht && y1 < d->win_height)
-								my_mlx_pixel_put(img, x1, y1, 0x00aa00aa);
+								my_mlx_pixel_put(img, x1, y1, 0x0000ff00);
 							y1++;
 							e = e + dx;
 							if (e <= 0)
@@ -242,7 +242,7 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 						{
 //							color1 = d->tab_color[i][j];
 							if (x1 > 0 && y1 > 0 && x1 < d->win_widht && y1 < d->win_height)
-								my_mlx_pixel_put(img, x1, y1, 0x00aa00aa);
+								my_mlx_pixel_put(img, x1, y1, 0x0000ff00);
 							x1--;
 							e = e - dy;
 							if (e >= 0)
@@ -261,7 +261,7 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 						{
 //							color1 = d->tab_color[i][j];
 							if (x1 > 0 && y1 > 0 && x1 < d->win_widht && y1 < d->win_height)
-								my_mlx_pixel_put(img, x1, y1, 0x00aa00aa);
+								my_mlx_pixel_put(img, x1, y1, 0x0000ff00);
 							y1--;
 							e = e - dx;
 							if (e >= 0)
@@ -279,7 +279,7 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 				{
 //					color1 = d->tab_color[i][j];
 					if (x1 > 0 && y1 > 0 && x1 < d->win_widht && y1 < d->win_height)
-						my_mlx_pixel_put(img, x1, y1, 0x00aa00aa);
+						my_mlx_pixel_put(img, x1, y1, 0x0000ff00);
 					x1--;
 				}
 			}
@@ -295,7 +295,7 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 				{
 //					color1 = d->tab_color[i][j];
 					if (x1 > 0 && y1 > 0 && x1 < d->win_widht && y1 < d->win_height)
-						my_mlx_pixel_put(img, x1, y1, 0x00aa00aa);
+						my_mlx_pixel_put(img, x1, y1, 0x000000ff);
 					y1++;
 				}
 			}
@@ -305,7 +305,7 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 				{
 //					color1 = d->tab_color[i][j];
 					if (x1 > 0 && y1 > 0 && x1 < d->win_widht && y1 < d->win_height)
-						my_mlx_pixel_put(img, x1, y1, 0x00aa00aa);
+						my_mlx_pixel_put(img, x1, y1, 0x000000ff);
 					y1--;
 				}
 			}
