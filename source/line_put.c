@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:31:58 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/13 17:43:15 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/13 17:48:12 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,10 +188,21 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 								x1++;
 								e = e + dy;
 							}
-							if ()
-							dif_y_iR = dif_y_iR + dif_y_R;////////////////////////////////////////
-							dif_y_iV = dif_y_iV + dif_y_V;
-							dif_y_iB = dif_y_iB + dif_y_B;
+							//if (color1_R > color2_R)
+							//	dif_y_iR = dif_y_iR + dif_y_R;
+							//else
+							//	dif_y_iR = dif_y_iR - dif_y_R;
+							//if (color1_V > color2_V)
+							//	dif_y_iV = dif_y_iV + dif_y_V;
+							//else
+							//	dif_y_iV = dif_y_iV - dif_y_V;
+							//if (color1_B > color2_B)
+							//	dif_y_iB = dif_y_iB + dif_y_B;
+							//else
+							//	dif_y_iB = dif_y_iB - dif_y_B;
+							dif_iR = dif_iR + dif_R;
+							dif_iV = dif_iV + dif_V;
+							dif_iB = dif_iB + dif_B;
 						}
 					}
 				}
