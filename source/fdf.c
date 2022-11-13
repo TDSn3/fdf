@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:27:35 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/13 17:19:26 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/13 19:02:22 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	main(void)
 	}
 ////
 
-	if (setup_tab(&d, "mlx_util/maps/test_maps/t2.fdf"))
+	if (setup_tab(&d, "mlx_util/maps/test_maps/42.fdf"))
 		return (1);
 
 
@@ -105,7 +105,7 @@ static void	show_double_tab(t_data_util *d)
 	{
 		while (j < d->tab_widht)
 		{
-			printf("%d ", d->tab_hw[i][j]);
+			printf("%d ", d->tab_color[i][j]);
 			j++;
 		}
 		printf("\n");
