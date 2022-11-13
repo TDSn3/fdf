@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:27:35 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/12 23:20:32 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/13 16:29:11 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,18 @@ int	main(void)
 	}
 ////
 
-	if (setup_tab(&d, "mlx_util/maps/test_maps/julia.fdf"))
+	if (setup_tab(&d, "mlx_util/maps/test_maps/42.fdf"))
 		return (1);
 
 
-////Square size
-//	printf("widht = %d  height = %d ", d.tab_widht, d.tab_height);
-//	if (d.win_widht > d.tab_height)
-//		d.square_size = d.win_widht / (d.tab_widht * 2);
-//	else
-//		d.square_size = d.win_height / (d.tab_height * 2);
-//	printf("square = %d\n", d.square_size);
-////
+//Square size
+	printf("widht = %d  height = %d ", d.tab_widht, d.tab_height);
+	if (d.win_widht > d.tab_height)
+		d.square_size = d.win_widht / (d.tab_widht * 2);
+	else
+		d.square_size = d.win_height / (d.tab_height * 2);
+	printf("square = %d\n", d.square_size);
+//
 
 
 //	show_double_tab(&d);
