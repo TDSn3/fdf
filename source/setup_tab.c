@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 15:15:01 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/13 18:49:21 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/14 17:14:53 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	setup_tab(t_data_util *d, const char *pathname)
 	int			i;
 	int			comma;
 
+	fd = 0;
+	str = NULL;
 	i = 0;
 	comma = 0;
 	setup_hw_tab(d, pathname);
@@ -115,10 +117,18 @@ int	setup_tab(t_data_util *d, const char *pathname)
 		y_tab = 0;
 		x_tab++;
 		if (str)
+		{
 			free(str);
+			str = NULL;
+		}
 		str = get_next_line(fd);
 	}
 	close(fd);
+	if (str)
+	{
+		free(str);
+		str = NULL;
+	}
 	if (comma == 0)
 		d->li_color = nb_nb_point(d);
 	return (0);

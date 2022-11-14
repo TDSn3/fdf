@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 15:11:18 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/12 18:13:36 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/14 15:05:28 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,21 @@ typedef struct	s_data_mlximg
 	int		endian;
 }	t_data_mlximg;
 
-typedef struct	s_vars {
-	void	*mlx;
-	void	*win;
-	void	*img;
-}	t_vars;
-
 typedef struct	s_data_util
 {
-	int		win_widht;
-	int		win_height;
-	int 	square_size;
-	int		tab_widht;
-	int		tab_height;
-	int		**tab_hw;
-	int		**tab_color;
-	int		**pos_x;
-	int		**pos_y;
-	t_li	*li_color;
+	void			*mlx;
+	void			*win;
+	t_data_mlximg	*img;
+	int				win_widht;
+	int				win_height;
+	int 			square_size;
+	int				tab_widht;
+	int				tab_height;
+	int				**tab_hw;
+	int				**tab_color;
+	int				**pos_x;
+	int				**pos_y;
+	t_li			*li_color;
 }	t_data_util;
 
 #endif
