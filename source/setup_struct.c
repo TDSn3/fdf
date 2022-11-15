@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 14:02:12 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/14 13:13:52 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/15 18:10:21 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,8 @@ void	setup_struct(t_data_util *d)
 	d->pos_x = NULL;
 	d->pos_y = NULL;
 	d->tab_color = NULL;
+	d->h_point = 2;
+	d->x_shift = 0;
+	d->y_shift = 0;
+	d->rotation = 45;
 }

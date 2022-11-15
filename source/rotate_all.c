@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 13:17:07 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/11 20:48:30 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/15 17:40:25 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,15 +86,15 @@ void	rotate_all(t_data_util *d, void *mlx, void *mlx_win, t_data_mlximg *img)
 		while (j < w)
 		{
 			if (i + 1 < h)
-				line_put(d->pos_x[i][j] + (d->square_size / 1),
+				line_put(d->pos_x[i][j] + d->square_size,
 						 d->pos_y[i][j],
-						 d->pos_x[i + 1][j] + (d->square_size / 1),
+						 d->pos_x[i + 1][j] + d->square_size,
 						 d->pos_y[i + 1][j],
 						 mlx, mlx_win, img, d, i, j, i + 1, j);
 			if (j + 1 < w)
-				line_put(d->pos_x[i][j] + (d->square_size / 1),
+				line_put(d->pos_x[i][j] + d->square_size,
 						 d->pos_y[i][j],
-						 d->pos_x[i][j + 1] + (d->square_size / 1),
+						 d->pos_x[i][j + 1] + d->square_size,
 						 d->pos_y[i][j + 1],
 						 mlx, mlx_win, img, d, i, j, i, j + 1);
 			j++;
