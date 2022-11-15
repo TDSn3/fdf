@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:27:35 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/15 18:22:58 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/15 18:52:01 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(void)
 	d.img = &img;
 	d.mlx = mlx_init();
 	d.win = mlx_new_window(d.mlx, d.win_widht, d.win_height, "fdf");
-	if (setup_tab(&d, "mlx_util/maps/test_maps/42.fdf"))
+	if (setup_tab(&d, "mlx_util/maps/test_maps/julia.fdf"))
 		return (1);
 
 //Square size
