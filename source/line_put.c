@@ -6,13 +6,13 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:31:58 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/16 13:50:39 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/16 15:13:51 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <header.h>
 
-void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_mlximg *img, t_data_util *d, int i, int j, int i2, int j2)
+void	line_put(int x1, int y1, int x2, int y2, t_data_util *d, int i, int j, int i2, int j2)
 {
 	int	dx;
 	int	dy;
@@ -44,10 +44,10 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 
 	color = (color1_R << 16) + (color1_V << 8) + (color1_B);
 	if (x1 + d->x_shift > 0 && y1 + d->y_shift > 0 && x1 + d->x_shift < d->win_widht && y1 + d->y_shift < d->win_height)
-		my_mlx_pixel_put(img, x1 + d->x_shift, y1 + d->y_shift, color);
+		my_mlx_pixel_put(d->img, x1 + d->x_shift, y1 + d->y_shift, color);
 	color = (color2_R << 16) + (color2_V << 8) + (color2_B);
 	if (x2 + d->x_shift > 0 && y2 + d->y_shift > 0 && x2 + d->x_shift < d->win_widht && y2 + d->y_shift< d->win_height)
-		my_mlx_pixel_put(img, x2 + d->x_shift, y2 + d->y_shift, color);
+		my_mlx_pixel_put(d->img, x2 + d->x_shift, y2 + d->y_shift, color);
 
 	if (x2 > x1)
 	{
@@ -104,7 +104,7 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 						while (x1 < x2)
 						{
 							if (x1 + d->x_shift > 0 && y1 + d->y_shift > 0 && x1 + d->x_shift < d->win_widht && y1 + d->y_shift < d->win_height)
-								my_mlx_pixel_put(img, x1 + d->x_shift, y1 + d->y_shift, color);
+								my_mlx_pixel_put(d->img, x1 + d->x_shift, y1 + d->y_shift, color);
 							x1++;
 							e = e - dy;
 							if (e < 0)
@@ -127,7 +127,7 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 						while (x1 <= x2 && y1 <= y2)
 						{
 							if (x1 + d->x_shift > 0 && y1 + d->y_shift > 0 && x1 + d->x_shift < d->win_widht && y1 + d->y_shift < d->win_height)
-								my_mlx_pixel_put(img, x1 + d->x_shift, y1 + d->y_shift, color);
+								my_mlx_pixel_put(d->img, x1 + d->x_shift, y1 + d->y_shift, color);
 							y1++;
 							e = e - dx;
 							if (e < 0)
@@ -153,7 +153,7 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 						while (x1 < x2)
 						{
 							if (x1 + d->x_shift > 0 && y1 + d->y_shift > 0 && x1 + d->x_shift < d->win_widht && y1 + d->y_shift < d->win_height)
-								my_mlx_pixel_put(img, x1 + d->x_shift, y1 + d->y_shift, color);
+								my_mlx_pixel_put(d->img, x1 + d->x_shift, y1 + d->y_shift, color);
 							x1++;
 							e = e + dy;
 							if (e < 0)
@@ -176,7 +176,7 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 						while (x1 <= x2 && y1 >= y2)
 						{
 							if (x1 + d->x_shift > 0 && y1 + d->y_shift > 0 && x1 + d->x_shift < d->win_widht && y1 + d->y_shift < d->win_height)
-								my_mlx_pixel_put(img, x1 + d->x_shift, y1 + d->y_shift, color);
+								my_mlx_pixel_put(d->img, x1 + d->x_shift, y1 + d->y_shift, color);
 							y1--;
 							e = e + dx;
 							if (e > 0)
@@ -198,7 +198,7 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 				while (x1 < x2)
 				{
 					if (x1 + d->x_shift > 0 && y1 + d->y_shift > 0 && x1 + d->x_shift < d->win_widht && y1 + d->y_shift < d->win_height)
-						my_mlx_pixel_put(img, x1 + d->x_shift, y1 + d->y_shift, color);
+						my_mlx_pixel_put(d->img, x1 + d->x_shift, y1 + d->y_shift, color);
 					x1++;
 					dif_iR = dif_iR + dif_R;
 					dif_iV = dif_iV + dif_V;
@@ -222,7 +222,7 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 						while (x1 > x2)
 						{
 							if (x1 + d->x_shift > 0 && y1 + d->y_shift > 0 && x1 + d->x_shift < d->win_widht && y1 + d->y_shift < d->win_height)
-								my_mlx_pixel_put(img, x1 + d->x_shift, y1 + d->y_shift, color);
+								my_mlx_pixel_put(d->img, x1 + d->x_shift, y1 + d->y_shift, color);
 							x1--;
 							e = e + dy;
 							if (e >= 0)
@@ -245,7 +245,7 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 						while (x1 >= x2 && y1 <= y2)
 						{
 							if (x1 + d->x_shift > 0 && y1 + d->y_shift > 0 && x1 + d->x_shift < d->win_widht && y1 + d->y_shift < d->win_height)
-								my_mlx_pixel_put(img, x1 + d->x_shift, y1 + d->y_shift, color);
+								my_mlx_pixel_put(d->img, x1 + d->x_shift, y1 + d->y_shift, color);
 							y1++;
 							e = e + dx;
 							if (e <= 0)
@@ -271,7 +271,7 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 						while (x1 > x2)
 						{
 							if (x1 + d->x_shift > 0 && y1 + d->y_shift > 0 && x1 + d->x_shift < d->win_widht && y1 + d->y_shift < d->win_height)
-								my_mlx_pixel_put(img, x1 + d->x_shift, y1 + d->y_shift, color);
+								my_mlx_pixel_put(d->img, x1 + d->x_shift, y1 + d->y_shift, color);
 							x1--;
 							e = e - dy;
 							if (e >= 0)
@@ -294,7 +294,7 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 						while (x1 >= x2 && y1 >= y2)
 						{
 							if (x1 + d->x_shift > 0 && y1 + d->y_shift > 0 && x1 + d->x_shift < d->win_widht && y1 + d->y_shift < d->win_height)
-								my_mlx_pixel_put(img, x1 + d->x_shift, y1 + d->y_shift, color);
+								my_mlx_pixel_put(d->img, x1 + d->x_shift, y1 + d->y_shift, color);
 							y1--;
 							e = e - dx;
 							if (e >= 0)
@@ -316,7 +316,7 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 				while (x1 > x2)
 				{
 					if (x1 + d->x_shift > 0 && y1 + d->y_shift > 0 && x1 + d->x_shift < d->win_widht && y1 + d->y_shift < d->win_height)
-						my_mlx_pixel_put(img, x1 + d->x_shift, y1 + d->y_shift, color);
+						my_mlx_pixel_put(d->img, x1 + d->x_shift, y1 + d->y_shift, color);
 					x1--;
 					dif_iR = dif_iR + dif_R;
 					dif_iV = dif_iV + dif_V;
@@ -336,7 +336,7 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 				while (y1 < y2)
 				{
 					if (x1 + d->x_shift > 0 && y1 + d->y_shift > 0 && x1 + d->x_shift < d->win_widht && y1 + d->y_shift < d->win_height)
-						my_mlx_pixel_put(img, x1 + d->x_shift, y1 + d->y_shift, color);
+						my_mlx_pixel_put(d->img, x1 + d->x_shift, y1 + d->y_shift, color);
 					y1++;
 					dif_y_iR = dif_y_iR + dif_y_R;
 					dif_y_iV = dif_y_iV + dif_y_V;
@@ -350,7 +350,7 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 				while (y1 > y2)
 				{
 					if (x1 + d->x_shift > 0 && y1 + d->y_shift > 0 && x1 + d->x_shift < d->win_widht && y1 + d->y_shift < d->win_height)
-						my_mlx_pixel_put(img, x1 + d->x_shift, y1 + d->y_shift, color);
+						my_mlx_pixel_put(d->img, x1 + d->x_shift, y1 + d->y_shift, color);
 					y1--;
 					dif_y_iR = dif_y_iR + dif_y_R;
 					dif_y_iV = dif_y_iV + dif_y_V;

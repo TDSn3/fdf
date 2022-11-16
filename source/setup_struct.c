@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 14:02:12 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/15 18:10:21 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/16 14:40:47 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,5 @@ void	setup_struct(t_data_util *d)
 	d->x_shift = 0;
 	d->y_shift = 0;
 	d->rotation = 45;
+	d->projection = 0.42;
 }

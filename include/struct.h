@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 15:11:18 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/16 13:48:54 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/16 15:09:36 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,16 @@ typedef struct	s_data_mlximg
 	int		line_length;
 	int		endian;
 }	t_data_mlximg;
+
+typedef struct	s_rotate_all_vars
+{
+	int		fd;
+	int		comma;
+	int		x_tab;
+	int		y_tab;
+	int		x_str;
+	char	*str;
+}	t_rotate_all_vars;
 
 typedef struct	s_setup_tab_vars
 {
@@ -85,6 +95,7 @@ typedef struct	s_data_util
 	int				x_shift;
 	int				y_shift;
 	int				rotation;
+	float			projection;
 }	t_data_util;
 
 #endif
