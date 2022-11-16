@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:31:58 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/16 13:32:06 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/16 13:50:39 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -291,7 +291,7 @@ void	line_put(int x1, int y1, int x2, int y2, void *mlx, void *mlx_win, t_data_m
 						dx = dx * 2;
 						dy = e * 2;
 						color = (color1_R << 16) + (color1_V << 8) + (color1_B);
-						while (x1 > x2)
+						while (x1 >= x2 && y1 >= y2)
 						{
 							if (x1 + d->x_shift > 0 && y1 + d->y_shift > 0 && x1 + d->x_shift < d->win_widht && y1 + d->y_shift < d->win_height)
 								my_mlx_pixel_put(img, x1 + d->x_shift, y1 + d->y_shift, color);
