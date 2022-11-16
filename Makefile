@@ -6,7 +6,7 @@
 #    By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/17 14:32:32 by tda-silv          #+#    #+#              #
-#    Updated: 2022/11/15 22:15:09 by tda-silv         ###   ########.fr        #
+#    Updated: 2022/11/16 10:29:28 by tda-silv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRC = $(addprefix ./source/, \
 						   put_background.c \
 						   calloc_all.c \
 						   free_all.c \
+						   square_size.c \
 	  ) \
 
 OBJ = $(SRC:.c=.o)

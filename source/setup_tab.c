@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 15:15:01 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/15 17:22:02 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/16 10:30:47 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,6 +224,7 @@ int	setup_tab(t_data_util *d, const char *pathname)
 	}
 	if (comma == 0)
 		d->li_color = nb_nb_point(d);
+	square_size(d);
 	return (0);
 }
 void	color_specified(t_data_util *d, char *str, int *x_str)

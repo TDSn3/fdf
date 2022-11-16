@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:27:35 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/16 10:12:09 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/16 13:15:56 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,27 +31,22 @@ int	main(void)
 	d.img = &img;
 	d.mlx = mlx_init();
 	d.win = mlx_new_window(d.mlx, d.win_widht, d.win_height, "fdf");
-	if (setup_tab(&d, "mlx_util/maps/test_maps/julia.fdf"))
+	if (setup_tab(&d, "mlx_util/maps/test_maps/42.fdf"))
 		return (1);
-
-//Square size
-	ft_printf("widht = %d  height = %d ", d.tab_widht, d.tab_height);
-	if (d.win_widht > d.tab_height)
-		d.square_size = d.win_widht / (d.tab_widht * 2);
-	else
-		d.square_size = d.win_height / (d.tab_height * 2);
-	printf("square = %d\n", d.square_size);
-//
-
-////////
-////
-
+	ft_printf("P - plus, square size +1\n");
+	ft_printf("M - minus, square size -1\n");
+	ft_printf("A - rotation -1\n");
+	ft_printf("D - rotation +1\n");
+	ft_printf("O - plus2, point size +1\n");
+	ft_printf("N - minus2, point height -1\n");
+	ft_printf("R - reset\n");
 	mlx_key_hook(d.win, key_hook, &d);
 	mlx_hook(d.win, 17, 0L, test, &d);
 	mlx_loop_hook(d.mlx, gen_new_img, &d);
 
 ////
 ////////
+
 	mlx_loop(d.mlx);
 
 	printf("final all_free\n");
@@ -75,61 +70,37 @@ int	key_hook(int keycode, t_data_util *d)
 		exit (0);	
 	}
 	if (keycode == 112 || keycode == 35)
-	{
-		printf("P - plus, square size +1\n");
 		d->square_size += 1;
-	}
 	if (keycode == 109 || keycode == 46)
 	{
-		printf("M - minus, square size -1\n");
 		if (d->square_size > 1)
 			d->square_size -= 1;
 		else
-			printf("STOP - Smallest size reached\n");
+			ft_printf("STOP - Smallest size reached\n");
 	}
 	if (keycode == 111 || keycode == 31)
 	{
-		printf("O - plus2, point size +1\n");
 		d->h_point += 1;
 	}
 	if (keycode == 110 || keycode == 45)
 	{
-		printf("N - minus2, point height -1\n");
 		if (d->h_point > 0)
 			d->h_point -= 1;
 		else
 			printf("STOP - Smallest size reached\n");
 	}
-	if (keycode == 65361 || keycode == 123)
-	{
-		printf("left\n");
-		d->x_shift -= 20;
-	}
-	if (keycode == 65362 || keycode == 126)
-	{
-		printf("up\n");
-		d->y_shift -= 20;
-	}
 	if (keycode == 65363 || keycode == 124)
-	{
-		printf("right\n");
+		d->x_shift -= 20;
+	if (keycode == 65361 || keycode == 123)
 		d->x_shift += 20;
-	}
 	if (keycode == 65364 || keycode == 125)
-	{
-		printf("down\n");
+		d->y_shift -= 20;
+	if (keycode == 65362 || keycode == 126)
 		d->y_shift += 20;
-	}
 	if (keycode == 97 || keycode == 0)
-	{
-		printf("A - rotation -1\n");
 		d->rotation -= 1;
-	}
 	if (keycode == 100 || keycode == 2)
-	{
-		printf("D - rotation +1\n");
 		d->rotation += 1;
-	}
 	if (keycode == 114 || keycode == 15)
 	{
 		printf("R - reset\n");
@@ -137,14 +108,7 @@ int	key_hook(int keycode, t_data_util *d)
 		d->x_shift = 0;
 		d->y_shift = 0;
 		d->h_point = 2;
-//Square size
-		ft_printf("widht = %d  height = %d ", d->tab_widht, d->tab_height);
-		if (d->win_widht > d->tab_height)
-			d->square_size = d->win_widht / (d->tab_widht * 2);
-		else
-			d->square_size = d->win_height / (d->tab_height * 2);
-		printf("square = %d\n", d->square_size);
-//
+		square_size(d);
 	}
 	return (0);
 }
@@ -164,8 +128,6 @@ int	test(t_data_util *d)
 
 int	gen_new_img(t_data_util *d)
 {
-	if (d->img->img == NULL)
-		printf("new image\n");
 	d->img->img = mlx_new_image(d->mlx, d->win_widht, d->win_height);
 	d->img->addr = mlx_get_data_addr(d->img->img, &d->img->bits_per_pixel, &d->img->line_length, &d->img->endian);
 	put_background(d);

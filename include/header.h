@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:29:18 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/15 16:02:58 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/16 10:29:21 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ t_li    *nb_nb_point(t_data_util *d);
 void	put_background(t_data_util *d);
 int     calloc_all(t_data_util *d);
 void	free_all(t_data_util *d);
+void	square_size(t_data_util *d);
 
 #endif
