@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:27:35 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/15 18:52:01 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/16 10:12:09 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,17 +69,17 @@ int	key_hook(int keycode, t_data_util *d)
 		if (d->img->img)
 			mlx_destroy_image(d->mlx, d->img->img);
 		mlx_destroy_window(d->mlx, d->win);
-		mlx_destroy_display(d->mlx);
+////		mlx_destroy_display(d->mlx);
 		free(d->mlx);
 		free_all(d);
 		exit (0);	
 	}
-	if (keycode == 112)
+	if (keycode == 112 || keycode == 35)
 	{
 		printf("P - plus, square size +1\n");
 		d->square_size += 1;
 	}
-	if (keycode == 109)
+	if (keycode == 109 || keycode == 46)
 	{
 		printf("M - minus, square size -1\n");
 		if (d->square_size > 1)
@@ -87,12 +87,12 @@ int	key_hook(int keycode, t_data_util *d)
 		else
 			printf("STOP - Smallest size reached\n");
 	}
-	if (keycode == 111)
+	if (keycode == 111 || keycode == 31)
 	{
 		printf("O - plus2, point size +1\n");
 		d->h_point += 1;
 	}
-	if (keycode == 110)
+	if (keycode == 110 || keycode == 45)
 	{
 		printf("N - minus2, point height -1\n");
 		if (d->h_point > 0)
@@ -100,37 +100,37 @@ int	key_hook(int keycode, t_data_util *d)
 		else
 			printf("STOP - Smallest size reached\n");
 	}
-	if (keycode == 65361)
+	if (keycode == 65361 || keycode == 123)
 	{
 		printf("left\n");
 		d->x_shift -= 20;
 	}
-	if (keycode == 65362)
+	if (keycode == 65362 || keycode == 126)
 	{
 		printf("up\n");
 		d->y_shift -= 20;
 	}
-	if (keycode == 65363)
+	if (keycode == 65363 || keycode == 124)
 	{
 		printf("right\n");
 		d->x_shift += 20;
 	}
-	if (keycode == 65364)
+	if (keycode == 65364 || keycode == 125)
 	{
 		printf("down\n");
 		d->y_shift += 20;
 	}
-	if (keycode == 97)
+	if (keycode == 97 || keycode == 0)
 	{
 		printf("A - rotation -1\n");
 		d->rotation -= 1;
 	}
-	if (keycode == 100)
+	if (keycode == 100 || keycode == 2)
 	{
 		printf("D - rotation +1\n");
 		d->rotation += 1;
 	}
-	if (keycode == 114)
+	if (keycode == 114 || keycode == 15)
 	{
 		printf("R - reset\n");
 		d->rotation = 45;
@@ -155,7 +155,7 @@ int	test(t_data_util *d)
 	if (d->img->img)
 		mlx_destroy_image(d->mlx, d->img->img);
 	mlx_destroy_window(d->mlx, d->win);
-	mlx_destroy_display(d->mlx);
+////	mlx_destroy_display(d->mlx);
 	free(d->mlx);
 	free_all(d);
 	exit (0);
