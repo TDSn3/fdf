@@ -6,11 +6,13 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 16:01:16 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/15 16:02:45 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/17 00:23:51 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <header.h>
+
+static void	part_two(t_data_util *d);
 
 void	free_all(t_data_util *d)
 {
@@ -30,6 +32,13 @@ void	free_all(t_data_util *d)
 			free(d->tab_color[i++]);
 		free(d->tab_color);
 	}
+	part_two(d);
+}
+
+static void	part_two(t_data_util *d)
+{
+	int	i;
+
 	i = 0;
 	if (d->pos_x)
 	{
@@ -45,8 +54,5 @@ void	free_all(t_data_util *d)
 		free(d->pos_y);
 	}
 	if (d->li_color)
-	{
-		printf("li_color clear\n");
 		li_clear(&d->li_color);
-	}
 }

@@ -6,358 +6,346 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:31:58 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/16 15:13:51 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/17 12:39:39 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <header.h>
 
-void	line_put(int x1, int y1, int x2, int y2, t_data_util *d, int i, int j, int i2, int j2)
-{
-	int	dx;
-	int	dy;
-	int	e;
-	int color1_R;
-	int color1_V;
-	int color1_B;
+static void	ssv(t_data_util *d, t_rotate_all_vars *v, t_line_put_vars *vl);
+static void	ssvpt(t_data_util *d, t_rotate_all_vars *v, t_line_put_vars *vl);
 
-	int color2_R;
-	int color2_V;
-	int color2_B;
+void	line_put(t_data_util *d, t_rotate_all_vars *v, t_line_put_vars *vl)
+{	
+	ssv(d, v, vl);
+	vl->color = (vl->c_one_r << 16) + (vl->c_one_v << 8) + (vl->c_one_b);
+	if (vl->x_one + d->x_shift > 0 && vl->y_one + d->y_shift > 0 && vl->x_one + d->x_shift < d->win_widht && vl->y_one + d->y_shift < d->win_height)
+		my_mlx_pixel_put(d->img, vl->x_one + d->x_shift, vl->y_one + d->y_shift, vl->color);
 
-	int color;
+	vl->color = (vl->c_two_r << 16) + (vl->c_two_v << 8) + (vl->c_two_b);
+	if (vl->x_two + d->x_shift > 0 && vl->y_two + d->y_shift > 0 && vl->x_two + d->x_shift < d->win_widht && vl->y_two + d->y_shift < d->win_height)
+		my_mlx_pixel_put(d->img, vl->x_two + d->x_shift, vl->y_two + d->y_shift, vl->color);
 
-	float	dif_R;
-	float	dif_V;
-	float	dif_B;
-
-	dx = x2 - x1;
-	dy = y2 - y1;
-
-	color1_R = (d->tab_color[i][j] >> 16) % 256;
-	color1_V = (d->tab_color[i][j] >> 8) % 256;
-	color1_B = (d->tab_color[i][j]) % 256;
-
-	color2_R = (d->tab_color[i2][j2] >> 16) % 256;
-	color2_V = (d->tab_color[i2][j2] >> 8) % 256;
-	color2_B = (d->tab_color[i2][j2]) % 256;
-
-	color = (color1_R << 16) + (color1_V << 8) + (color1_B);
-	if (x1 + d->x_shift > 0 && y1 + d->y_shift > 0 && x1 + d->x_shift < d->win_widht && y1 + d->y_shift < d->win_height)
-		my_mlx_pixel_put(d->img, x1 + d->x_shift, y1 + d->y_shift, color);
-	color = (color2_R << 16) + (color2_V << 8) + (color2_B);
-	if (x2 + d->x_shift > 0 && y2 + d->y_shift > 0 && x2 + d->x_shift < d->win_widht && y2 + d->y_shift< d->win_height)
-		my_mlx_pixel_put(d->img, x2 + d->x_shift, y2 + d->y_shift, color);
-
-	if (x2 > x1)
+	if (vl->dx != 0)
 	{
-			dif_R = (float)(color2_R - color1_R) / (float)(x2 - x1);
-			dif_V = (float)(color2_V - color1_V) / (float)(x2 - x1);
-			dif_B = (float)(color2_B - color1_B) / (float)(x2 - x1);
-	}
-	else
-	{
-			dif_R = (float)(color2_R - color1_R) / (float)(x1 - x2);
-			dif_V = (float)(color2_V - color1_V) / (float)(x1 - x2);
-			dif_B = (float)(color2_B - color1_B) / (float)(x1 - x2);
-	}
-
-	float dif_y_R;
-	float dif_y_V;
-	float dif_y_B;
-
-	if (y2 > y1)
-	{
-			dif_y_R = (float)(color2_R - color1_R) / (float)(y2 - y1);
-			dif_y_V = (float)(color2_V - color1_V) / (float)(y2 - y1);
-			dif_y_B = (float)(color2_B - color1_B) / (float)(y2 - y1);
-	}
-	else
-	{
-			dif_y_R = (float)(color2_R - color1_R) / (float)(y1 - y2);
-			dif_y_V = (float)(color2_V - color1_V) / (float)(y1 - y2);
-			dif_y_B = (float)(color2_B - color1_B) / (float)(y1 - y2);
-	}
-	
-	float	dif_iR = dif_R;
-	float	dif_iV = dif_V;
-	float	dif_iB = dif_B;
-
-	float	dif_y_iR = dif_y_R;
-	float	dif_y_iV = dif_y_V;
-	float	dif_y_iB = dif_y_B;
-
-	if (dx != 0)
-	{
-		if (dx > 0)
+		if (vl->dx > 0)
 		{
-			if (dy != 0)
+			if (vl->dy != 0)
 			{
-				if (dy > 0) // && dx > 0 // cadran 4
+				if (vl->dy > 0) // && dx > 0 // cadran 4
 				{
-					if (dx >= dy) // octant 8
+					if (vl->dx >= vl->dy) // octant 8
 					{
-						e = dx;
-						dx = e * 2;
-						dy = dy * 2;
-						color = (color1_R << 16) + (color1_V << 8) + (color1_B);
-						while (x1 < x2)
+						vl->e = vl->dx;
+						vl->dx = vl->e * 2;
+						vl->dy = vl->dy * 2;
+						vl->color = (vl->c_one_r << 16) + (vl->c_one_v << 8) + (vl->c_one_b);
+						while (vl->x_one < vl->x_two)
 						{
-							if (x1 + d->x_shift > 0 && y1 + d->y_shift > 0 && x1 + d->x_shift < d->win_widht && y1 + d->y_shift < d->win_height)
-								my_mlx_pixel_put(d->img, x1 + d->x_shift, y1 + d->y_shift, color);
-							x1++;
-							e = e - dy;
-							if (e < 0)
+							if (vl->x_one + d->x_shift > 0 && vl->y_one + d->y_shift > 0 && vl->x_one + d->x_shift < d->win_widht && vl->y_one + d->y_shift < d->win_height)
+								my_mlx_pixel_put(d->img, vl->x_one + d->x_shift, vl->y_one + d->y_shift, vl->color);
+							vl->x_one++;
+							vl->e = vl->e - vl->dy;
+							if (vl->e < 0)
 							{
-								y1++;
-								e = e + dx;
+								vl->y_one++;
+								vl->e = vl->e + vl->dx;
 							}
-							dif_iR = dif_iR + dif_R;
-							dif_iV = dif_iV + dif_V;
-							dif_iB = dif_iB + dif_B;
-							color = ((color1_R + (int)(dif_iR + 0.5)) << 16) + ((color1_V  + (int)(dif_iV + 0.5)) << 8) + (color1_B + (int)(dif_iB + 0.5));
+							vl->dif_xi_r = vl->dif_xi_r + vl->dif_x_r;
+							vl->dif_xi_v = vl->dif_xi_v + vl->dif_x_v;
+							vl->dif_xi_b = vl->dif_xi_b + vl->dif_x_b;
+							vl->color = ((vl->c_one_r + (int)(vl->dif_xi_r + 0.5)) << 16) + ((vl->c_one_v  + (int)(vl->dif_xi_v + 0.5)) << 8) + (vl->c_one_b + (int)(vl->dif_xi_b + 0.5));
 						}
 					}
 					else // dx < dy // octant 7
 					{
-						e = dy;
-						dx = dx * 2;
-						dy = e * 2;
-						color = (color1_R << 16) + (color1_V << 8) + (color1_B);
-						while (x1 <= x2 && y1 <= y2)
+						vl->e = vl->dy;
+						vl->dx = vl->dx * 2;
+						vl->dy = vl->e * 2;
+						vl->color = (vl->c_one_r << 16) + (vl->c_one_v << 8) + (vl->c_one_b);
+						while (vl->x_one <= vl->x_two && vl->y_one <= vl->y_two)
 						{
-							if (x1 + d->x_shift > 0 && y1 + d->y_shift > 0 && x1 + d->x_shift < d->win_widht && y1 + d->y_shift < d->win_height)
-								my_mlx_pixel_put(d->img, x1 + d->x_shift, y1 + d->y_shift, color);
-							y1++;
-							e = e - dx;
-							if (e < 0)
+							if (vl->x_one + d->x_shift > 0 && vl->y_one + d->y_shift > 0 && vl->x_one + d->x_shift < d->win_widht && vl->y_one + d->y_shift < d->win_height)
+								my_mlx_pixel_put(d->img, vl->x_one + d->x_shift, vl->y_one + d->y_shift, vl->color);
+							vl->y_one++;
+							vl->e = vl->e - vl->dx;
+							if (vl->e < 0)
 							{
-								x1++;
-								e = e + dy;
+								vl->x_one++;
+								vl->e = vl->e + vl->dy;
 							}
-							dif_y_iR = dif_y_iR + dif_y_R;
-							dif_y_iV = dif_y_iV + dif_y_V;
-							dif_y_iB = dif_y_iB + dif_y_B;
-							color = ((color1_R + (int)(dif_y_iR + 0.5)) << 16) + ((color1_V  + (int)(dif_y_iV + 0.5)) << 8) + (color1_B + (int)(dif_y_iB + 0.5));
+							vl->dif_yi_r = vl->dif_yi_r + vl->dif_y_r;
+							vl->dif_yi_v = vl->dif_yi_v + vl->dif_y_v;
+							vl->dif_yi_b = vl->dif_yi_b + vl->dif_y_b;
+							vl->color = ((vl->c_one_r + (int)(vl->dif_yi_r + 0.5)) << 16) + ((vl->c_one_v  + (int)(vl->dif_yi_v + 0.5)) << 8) + (vl->c_one_b + (int)(vl->dif_yi_b + 0.5));
 						}
 					}
 				}
 				else // dy < 0 && dx > 0 // cadran 1
 				{
-					if (dx >= -dy) // octant 1
+					if (vl->dx >= -vl->dy) // octant 1
 					{
-						e = dx;
-						dx = e * 2;
-						dy = dy * 2;
-						color = (color1_R << 16) + (color1_V << 8) + (color1_B);
-						while (x1 < x2)
+						vl->e = vl->dx;
+						vl->dx = vl->e * 2;
+						vl->dy = vl->dy * 2;
+						vl->color = (vl->c_one_r << 16) + (vl->c_one_v << 8) + (vl->c_one_b);
+						while (vl->x_one < vl->x_two)
 						{
-							if (x1 + d->x_shift > 0 && y1 + d->y_shift > 0 && x1 + d->x_shift < d->win_widht && y1 + d->y_shift < d->win_height)
-								my_mlx_pixel_put(d->img, x1 + d->x_shift, y1 + d->y_shift, color);
-							x1++;
-							e = e + dy;
-							if (e < 0)
+							if (vl->x_one + d->x_shift > 0 && vl->y_one + d->y_shift > 0 && vl->x_one + d->x_shift < d->win_widht && vl->y_one + d->y_shift < d->win_height)
+								my_mlx_pixel_put(d->img, vl->x_one + d->x_shift, vl->y_one + d->y_shift, vl->color);
+							vl->x_one++;
+							vl->e = vl->e + vl->dy;
+							if (vl->e < 0)
 							{
-								y1--;
-								e = e + dx;
+								vl->y_one--;
+								vl->e = vl->e + vl->dx;
 							}
-							dif_iR = dif_iR + dif_R;
-							dif_iV = dif_iV + dif_V;
-							dif_iB = dif_iB + dif_B;
-							color = ((color1_R + (int)(dif_iR + 0.5)) << 16) + ((color1_V  + (int)(dif_iV + 0.5)) << 8) + (color1_B + (int)(dif_iB + 0.5));
-						}
+							vl->dif_xi_r = vl->dif_xi_r + vl->dif_x_r;
+							vl->dif_xi_v = vl->dif_xi_v + vl->dif_x_v;
+							vl->dif_xi_b = vl->dif_xi_b + vl->dif_x_b;
+							vl->color = ((vl->c_one_r + (int)(vl->dif_xi_r + 0.5)) << 16) + ((vl->c_one_v  + (int)(vl->dif_xi_v + 0.5)) << 8) + (vl->c_one_b + (int)(vl->dif_xi_b + 0.5));
+							}
 					}
 					else // dx < -dy // octant 2
 					{
-						e = dy;
-						dx = dx * 2;
-						dy = e * 2;
-						color = (color1_R << 16) + (color1_V << 8) + (color1_B);
-						while (x1 <= x2 && y1 >= y2)
+						vl->e = vl->dy;
+						vl->dx = vl->dx * 2;
+						vl->dy = vl->e * 2;
+						vl->color = (vl->c_one_r << 16) + (vl->c_one_v << 8) + (vl->c_one_b);
+						while (vl->x_one <= vl->x_two && vl->y_one >= vl->y_two)
 						{
-							if (x1 + d->x_shift > 0 && y1 + d->y_shift > 0 && x1 + d->x_shift < d->win_widht && y1 + d->y_shift < d->win_height)
-								my_mlx_pixel_put(d->img, x1 + d->x_shift, y1 + d->y_shift, color);
-							y1--;
-							e = e + dx;
-							if (e > 0)
+							if (vl->x_one + d->x_shift > 0 && vl->y_one + d->y_shift > 0 && vl->x_one + d->x_shift < d->win_widht && vl->y_one + d->y_shift < d->win_height)
+								my_mlx_pixel_put(d->img, vl->x_one + d->x_shift, vl->y_one + d->y_shift, vl->color);
+							vl->y_one--;
+							vl->e = vl->e + vl->dx;
+							if (vl->e > 0)
 							{
-								x1++;
-								e = e + dy;
+								vl->x_one++;
+								vl->e = vl->e + vl->dy;
 							}
-							dif_y_iR = dif_y_iR + dif_y_R;
-							dif_y_iV = dif_y_iV + dif_y_V;
-							dif_y_iB = dif_y_iB + dif_y_B;
-							color = ((color1_R + (int)(dif_y_iR + 0.5)) << 16) + ((color1_V  + (int)(dif_y_iV + 0.5)) << 8) + (color1_B + (int)(dif_y_iB + 0.5));
-						}
+							vl->dif_yi_r = vl->dif_yi_r + vl->dif_y_r;
+							vl->dif_yi_v = vl->dif_yi_v + vl->dif_y_v;
+							vl->dif_yi_b = vl->dif_yi_b + vl->dif_y_b;
+							vl->color = ((vl->c_one_r + (int)(vl->dif_yi_r + 0.5)) << 16) + ((vl->c_one_v  + (int)(vl->dif_yi_v + 0.5)) << 8) + (vl->c_one_b + (int)(vl->dif_yi_b + 0.5));
+							}
 					}
 				}
 			}
 			else // dy == 0 && dx > 0
 			{
-				color = (color1_R << 16) + (color1_V << 8) + (color1_B);
-				while (x1 < x2)
+				vl->color = (vl->c_one_r << 16) + (vl->c_one_v << 8) + (vl->c_one_b);
+				while (vl->x_one < vl->x_two)
 				{
-					if (x1 + d->x_shift > 0 && y1 + d->y_shift > 0 && x1 + d->x_shift < d->win_widht && y1 + d->y_shift < d->win_height)
-						my_mlx_pixel_put(d->img, x1 + d->x_shift, y1 + d->y_shift, color);
-					x1++;
-					dif_iR = dif_iR + dif_R;
-					dif_iV = dif_iV + dif_V;
-					dif_iB = dif_iB + dif_B;
-					color = ((color1_R + (int)(dif_iR + 0.5)) << 16) + ((color1_V  + (int)(dif_iV + 0.5)) << 8) + (color1_B + (int)(dif_iB + 0.5));
+					if (vl->x_one + d->x_shift > 0 && vl->y_one + d->y_shift > 0 && vl->x_one + d->x_shift < d->win_widht && vl->y_one + d->y_shift < d->win_height)
+						my_mlx_pixel_put(d->img, vl->x_one + d->x_shift, vl->y_one + d->y_shift, vl->color);
+					vl->x_one++;
+					vl->dif_xi_r = vl->dif_xi_r + vl->dif_x_r;
+					vl->dif_xi_v = vl->dif_xi_v + vl->dif_x_v;
+					vl->dif_xi_b = vl->dif_xi_b + vl->dif_x_b;
+					vl->color = ((vl->c_one_r + (int)(vl->dif_xi_r + 0.5)) << 16) + ((vl->c_one_v  + (int)(vl->dif_xi_v + 0.5)) << 8) + (vl->c_one_b + (int)(vl->dif_xi_b + 0.5));
 				}
 			}
 		}
 		else // dx < 0
 		{
-			if (dy != 0)
+			if (vl->dy != 0)
 			{
-				if (dy > 0) // && dx < 0 // cadran 3
+				if (vl->dy > 0) // && dx < 0 // cadran 3
 				{
-					if (-dx >= dy) // octant 5
+					if (-(vl->dx) >= vl->dy) // octant 5
 					{
-						e = dx;
-						dx = e * 2;
-						dy = dy * 2;
-						color = (color1_R << 16) + (color1_V << 8) + (color1_B);
-						while (x1 > x2)
+						vl->e = vl->dx;
+						vl->dx = vl->e * 2;
+						vl->dy = vl->dy * 2;
+						vl->color = (vl->c_one_r << 16) + (vl->c_one_v << 8) + (vl->c_one_b);
+						while (vl->x_one > vl->x_two)
 						{
-							if (x1 + d->x_shift > 0 && y1 + d->y_shift > 0 && x1 + d->x_shift < d->win_widht && y1 + d->y_shift < d->win_height)
-								my_mlx_pixel_put(d->img, x1 + d->x_shift, y1 + d->y_shift, color);
-							x1--;
-							e = e + dy;
-							if (e >= 0)
+							if (vl->x_one + d->x_shift > 0 && vl->y_one + d->y_shift > 0 && vl->x_one + d->x_shift < d->win_widht && vl->y_one + d->y_shift < d->win_height)
+								my_mlx_pixel_put(d->img, vl->x_one + d->x_shift, vl->y_one + d->y_shift, vl->color);
+							vl->x_one--;
+							vl->e = vl->e + vl->dy;
+							if (vl->e >= 0)
 							{
-								y1++;
-								e = e + dx;
+								vl->y_one++;
+								vl->e = vl->e + vl->dx;
 							}
-							dif_iR = dif_iR + dif_R;
-							dif_iV = dif_iV + dif_V;
-							dif_iB = dif_iB + dif_B;
-							color = ((color1_R + (int)(dif_iR + 0.5)) << 16) + ((color1_V  + (int)(dif_iV + 0.5)) << 8) + (color1_B + (int)(dif_iB + 0.5));
-						}
+							vl->dif_xi_r = vl->dif_xi_r + vl->dif_x_r;
+							vl->dif_xi_v = vl->dif_xi_v + vl->dif_x_v;
+							vl->dif_xi_b = vl->dif_xi_b + vl->dif_x_b;
+							vl->color = ((vl->c_one_r + (int)(vl->dif_xi_r + 0.5)) << 16) + ((vl->c_one_v  + (int)(vl->dif_xi_v + 0.5)) << 8) + (vl->c_one_b + (int)(vl->dif_xi_b + 0.5));						}
 					}
 					else // -dx < dy // octant 6
 					{
-						e = dy;
-						dx = dx * 2;
-						dy = e * 2;
-						color = (color1_R << 16) + (color1_V << 8) + (color1_B);
-						while (x1 >= x2 && y1 <= y2)
+						vl->e = vl->dy;
+						vl->dx = vl->dx * 2;
+						vl->dy = vl->e * 2;
+						vl->color = (vl->c_one_r << 16) + (vl->c_one_v << 8) + (vl->c_one_b);
+						while (vl->x_one >= vl->x_two && vl->y_one <= vl->y_two)
 						{
-							if (x1 + d->x_shift > 0 && y1 + d->y_shift > 0 && x1 + d->x_shift < d->win_widht && y1 + d->y_shift < d->win_height)
-								my_mlx_pixel_put(d->img, x1 + d->x_shift, y1 + d->y_shift, color);
-							y1++;
-							e = e + dx;
-							if (e <= 0)
+							if (vl->x_one + d->x_shift > 0 && vl->y_one + d->y_shift > 0 && vl->x_one + d->x_shift < d->win_widht && vl->y_one + d->y_shift < d->win_height)
+								my_mlx_pixel_put(d->img, vl->x_one + d->x_shift, vl->y_one + d->y_shift, vl->color);
+							vl->y_one++;
+							vl->e = vl->e + vl->dx;
+							if (vl->e <= 0)
 							{
-								x1--;
-								e = e + dy;
+								vl->x_one--;
+								vl->e = vl->e + vl->dy;
 							}
-							dif_y_iR = dif_y_iR + dif_y_R;
-							dif_y_iV = dif_y_iV + dif_y_V;
-							dif_y_iB = dif_y_iB + dif_y_B;
-							color = ((color1_R + (int)(dif_y_iR + 0.5)) << 16) + ((color1_V  + (int)(dif_y_iV + 0.5)) << 8) + (color1_B + (int)(dif_y_iB + 0.5));
-						}
+							vl->dif_yi_r = vl->dif_yi_r + vl->dif_y_r;
+							vl->dif_yi_v = vl->dif_yi_v + vl->dif_y_v;
+							vl->dif_yi_b = vl->dif_yi_b + vl->dif_y_b;
+							vl->color = ((vl->c_one_r + (int)(vl->dif_yi_r + 0.5)) << 16) + ((vl->c_one_v  + (int)(vl->dif_yi_v + 0.5)) << 8) + (vl->c_one_b + (int)(vl->dif_yi_b + 0.5));						}
 					}
 				}
 				else // dy < 0 && dx < 0 // cadran 2
 				{
-					if (dx <= dy) // octant 4
+					if (vl->dx <= vl->dy) // octant 4
 					{
-						e = dx;
-						dx = e * 2;
-						dy = dy * 2;
-						color = (color1_R << 16) + (color1_V << 8) + (color1_B);
-						while (x1 > x2)
+						vl->e = vl->dx;
+						vl->dx = vl->e * 2;
+						vl->dy = vl->dy * 2;
+						vl->color = (vl->c_one_r << 16) + (vl->c_one_v << 8) + (vl->c_one_b);
+						while (vl->x_one > vl->x_two)
 						{
-							if (x1 + d->x_shift > 0 && y1 + d->y_shift > 0 && x1 + d->x_shift < d->win_widht && y1 + d->y_shift < d->win_height)
-								my_mlx_pixel_put(d->img, x1 + d->x_shift, y1 + d->y_shift, color);
-							x1--;
-							e = e - dy;
-							if (e >= 0)
+							if (vl->x_one + d->x_shift > 0 && vl->y_one + d->y_shift > 0 && vl->x_one + d->x_shift < d->win_widht && vl->y_one + d->y_shift < d->win_height)
+								my_mlx_pixel_put(d->img, vl->x_one + d->x_shift, vl->y_one + d->y_shift, vl->color);
+							vl->x_one--;
+							vl->e = vl->e - vl->dy;
+							if (vl->e >= 0)
 							{
-								y1--;
-								e = e + dx;
+								vl->y_one--;
+								vl->e = vl->e + vl->dx;
 							}
-							dif_iR = dif_iR + dif_R;
-							dif_iV = dif_iV + dif_V;
-							dif_iB = dif_iB + dif_B;
-							color = ((color1_R + (int)(dif_iR + 0.5)) << 16) + ((color1_V  + (int)(dif_iV + 0.5)) << 8) + (color1_B + (int)(dif_iB + 0.5));
-						}
+							vl->dif_xi_r = vl->dif_xi_r + vl->dif_x_r;
+							vl->dif_xi_v = vl->dif_xi_v + vl->dif_x_v;
+							vl->dif_xi_b = vl->dif_xi_b + vl->dif_x_b;
+							vl->color = ((vl->c_one_r + (int)(vl->dif_xi_r + 0.5)) << 16) + ((vl->c_one_v  + (int)(vl->dif_xi_v + 0.5)) << 8) + (vl->c_one_b + (int)(vl->dif_xi_b + 0.5));						}
 					}
 					else // dx > dy // octant 3
 					{
-						e = dy;
-						dx = dx * 2;
-						dy = e * 2;
-						color = (color1_R << 16) + (color1_V << 8) + (color1_B);
-						while (x1 >= x2 && y1 >= y2)
+						vl->e = vl->dy;
+						vl->dx = vl->dx * 2;
+						vl->dy = vl->e * 2;
+						vl->color = (vl->c_one_r << 16) + (vl->c_one_v << 8) + (vl->c_one_b);
+						while (vl->x_one >= vl->x_two && vl->y_one >= vl->y_two)
 						{
-							if (x1 + d->x_shift > 0 && y1 + d->y_shift > 0 && x1 + d->x_shift < d->win_widht && y1 + d->y_shift < d->win_height)
-								my_mlx_pixel_put(d->img, x1 + d->x_shift, y1 + d->y_shift, color);
-							y1--;
-							e = e - dx;
-							if (e >= 0)
+							if (vl->x_one + d->x_shift > 0 && vl->y_one + d->y_shift > 0 && vl->x_one + d->x_shift < d->win_widht && vl->y_one + d->y_shift < d->win_height)
+								my_mlx_pixel_put(d->img, vl->x_one + d->x_shift, vl->y_one + d->y_shift, vl->color);
+							vl->y_one--;
+							vl->e = vl->e - vl->dx;
+							if (vl->e >= 0)
 							{
-								x1--;
-								e = e + dy;
+								vl->x_one--;
+								vl->e = vl->e + vl->dy;
 							}
-							dif_y_iR = dif_y_iR + dif_y_R;
-							dif_y_iV = dif_y_iV + dif_y_V;
-							dif_y_iB = dif_y_iB + dif_y_B;
-							color = ((color1_R + (int)(dif_y_iR + 0.5)) << 16) + ((color1_V  + (int)(dif_y_iV + 0.5)) << 8) + (color1_B + (int)(dif_y_iB + 0.5));
-						}
+							vl->dif_yi_r = vl->dif_yi_r + vl->dif_y_r;
+							vl->dif_yi_v = vl->dif_yi_v + vl->dif_y_v;
+							vl->dif_yi_b = vl->dif_yi_b + vl->dif_y_b;
+							vl->color = ((vl->c_one_r + (int)(vl->dif_yi_r + 0.5)) << 16) + ((vl->c_one_v  + (int)(vl->dif_yi_v + 0.5)) << 8) + (vl->c_one_b + (int)(vl->dif_yi_b + 0.5));						}
 					}
 				}
 			}
 			else // dy == 0 && dx < 0
 			{
-				color = (color1_R << 16) + (color1_V << 8) + (color1_B);
-				while (x1 > x2)
+				vl->color = (vl->c_one_r << 16) + (vl->c_one_v << 8) + (vl->c_one_b);
+				while (vl->x_one > vl->x_two)
 				{
-					if (x1 + d->x_shift > 0 && y1 + d->y_shift > 0 && x1 + d->x_shift < d->win_widht && y1 + d->y_shift < d->win_height)
-						my_mlx_pixel_put(d->img, x1 + d->x_shift, y1 + d->y_shift, color);
-					x1--;
-					dif_iR = dif_iR + dif_R;
-					dif_iV = dif_iV + dif_V;
-					dif_iB = dif_iB + dif_B;
-					color = ((color1_R + (int)(dif_iR + 0.5)) << 16) + ((color1_V  + (int)(dif_iV + 0.5)) << 8) + (color1_B + (int)(dif_iB + 0.5));
-				}
+					if (vl->x_one + d->x_shift > 0 && vl->y_one + d->y_shift > 0 && vl->x_one + d->x_shift < d->win_widht && vl->y_one + d->y_shift < d->win_height)
+						my_mlx_pixel_put(d->img, vl->x_one + d->x_shift, vl->y_one + d->y_shift, vl->color);
+					vl->x_one--;
+					vl->dif_xi_r = vl->dif_xi_r + vl->dif_x_r;
+					vl->dif_xi_v = vl->dif_xi_v + vl->dif_x_v;
+					vl->dif_xi_b = vl->dif_xi_b + vl->dif_x_b;
+					vl->color = ((vl->c_one_r + (int)(vl->dif_xi_r + 0.5)) << 16) + ((vl->c_one_v  + (int)(vl->dif_xi_v + 0.5)) << 8) + (vl->c_one_b + (int)(vl->dif_xi_b + 0.5));				}
 			}
 		}
 	}
 	else // dx == 0
 	{
-		if (dy != 0)
+		if (vl->dy != 0)
 		{
-			if (dy > 0) // dy > 0 && dx == 0
+			if (vl->dy > 0) // dy > 0 && dx == 0
 			{
-				color = (color1_R << 16) + (color1_V << 8) + (color1_B);
-				while (y1 < y2)
+				vl->color = (vl->c_one_r << 16) + (vl->c_one_v << 8) + (vl->c_one_b);
+				while (vl->y_one < vl->y_two)
 				{
-					if (x1 + d->x_shift > 0 && y1 + d->y_shift > 0 && x1 + d->x_shift < d->win_widht && y1 + d->y_shift < d->win_height)
-						my_mlx_pixel_put(d->img, x1 + d->x_shift, y1 + d->y_shift, color);
-					y1++;
-					dif_y_iR = dif_y_iR + dif_y_R;
-					dif_y_iV = dif_y_iV + dif_y_V;
-					dif_y_iB = dif_y_iB + dif_y_B;
-					color = ((color1_R + (int)(dif_y_iR + 0.5)) << 16) + ((color1_V  + (int)(dif_y_iV + 0.5)) << 8) + (color1_B + (int)(dif_y_iB + 0.5));
-				}
+					if (vl->x_one + d->x_shift > 0 && vl->y_one + d->y_shift > 0 && vl->x_one + d->x_shift < d->win_widht && vl->y_one + d->y_shift < d->win_height)
+						my_mlx_pixel_put(d->img, vl->x_one + d->x_shift, vl->y_one + d->y_shift, vl->color);
+					vl->y_one++;
+					vl->dif_yi_r = vl->dif_yi_r + vl->dif_y_r;
+					vl->dif_yi_v = vl->dif_yi_v + vl->dif_y_v;
+					vl->dif_yi_b = vl->dif_yi_b + vl->dif_y_b;
+					vl->color = ((vl->c_one_r + (int)(vl->dif_yi_r + 0.5)) << 16) + ((vl->c_one_v  + (int)(vl->dif_yi_v + 0.5)) << 8) + (vl->c_one_b + (int)(vl->dif_yi_b + 0.5));				}
 			}
 			else // dy < 0 && dx == 0
 			{
-				color = (color1_R << 16) + (color1_V << 8) + (color1_B);
-				while (y1 > y2)
+				vl->color = (vl->c_one_r << 16) + (vl->c_one_v << 8) + (vl->c_one_b);
+				while (vl->y_one > vl->y_two)
 				{
-					if (x1 + d->x_shift > 0 && y1 + d->y_shift > 0 && x1 + d->x_shift < d->win_widht && y1 + d->y_shift < d->win_height)
-						my_mlx_pixel_put(d->img, x1 + d->x_shift, y1 + d->y_shift, color);
-					y1--;
-					dif_y_iR = dif_y_iR + dif_y_R;
-					dif_y_iV = dif_y_iV + dif_y_V;
-					dif_y_iB = dif_y_iB + dif_y_B;
-					color = ((color1_R + (int)(dif_y_iR + 0.5)) << 16) + ((color1_V  + (int)(dif_y_iV + 0.5)) << 8) + (color1_B + (int)(dif_y_iB + 0.5));
-				}
+					if (vl->x_one + d->x_shift > 0 && vl->y_one + d->y_shift > 0 && vl->x_one + d->x_shift < d->win_widht && vl->y_one + d->y_shift < d->win_height)
+						my_mlx_pixel_put(d->img, vl->x_one + d->x_shift, vl->y_one + d->y_shift, vl->color);
+					vl->y_one--;
+					vl->dif_yi_r = vl->dif_yi_r + vl->dif_y_r;
+					vl->dif_yi_v = vl->dif_yi_v + vl->dif_y_v;
+					vl->dif_yi_b = vl->dif_yi_b + vl->dif_y_b;
+					vl->color = ((vl->c_one_r + (int)(vl->dif_yi_r + 0.5)) << 16) + ((vl->c_one_v  + (int)(vl->dif_yi_v + 0.5)) << 8) + (vl->c_one_b + (int)(vl->dif_yi_b + 0.5));				}
 			}
 		}
 	}
 }
+
+//			Setup Struct Vars
+static void	ssv(t_data_util *d, t_rotate_all_vars *v, t_line_put_vars *vl)
+{
+	vl->i_one = v->i;
+	vl->j_one = v->j;
+	vl->x_one = d->pos_x[v->i][v->j] + d->square_size;
+	vl->y_one = d->pos_y[v->i][v->j];
+	vl->dx = vl->x_two - vl->x_one;
+	vl->dy = vl->y_two - vl->y_one;
+	vl->e = 0;
+	vl->c_one_r = (d->tab_color[v->i][v->j] >> 16) % 256;
+	vl->c_one_v = (d->tab_color[v->i][v->j] >> 8) % 256;
+	vl->c_one_b = (d->tab_color[v->i][v->j]) % 256;
+	vl->c_two_r = (d->tab_color[vl->i_two][vl->j_two] >> 16) % 256;
+	vl->c_two_v = (d->tab_color[vl->i_two][vl->j_two] >> 8) % 256;
+	vl->c_two_b = (d->tab_color[vl->i_two][vl->j_two]) % 256;
+	vl->color = 0;
+	ssvpt(d, v, vl);
+}
+
+//			Setup Struct Vars Part Two
+static void	ssvpt(t_data_util *d, t_rotate_all_vars *v, t_line_put_vars *vl)
+{
+	if (vl->x_two > vl->x_one)
+	{
+			vl->dif_x_r = (float)(vl->c_two_r - vl->c_one_r) / (float)(vl->x_two - vl->x_one);
+			vl->dif_x_v = (float)(vl->c_two_v - vl->c_one_v) / (float)(vl->x_two - vl->x_one);
+			vl->dif_x_b = (float)(vl->c_two_b - vl->c_one_b) / (float)(vl->x_two - vl->x_one);
+	}
+	else
+	{
+			vl->dif_x_r = (float)(vl->c_two_r - vl->c_one_r) / (float)(vl->x_one - vl->x_two);
+			vl->dif_x_v = (float)(vl->c_two_v - vl->c_one_v) / (float)(vl->x_one - vl->x_two);
+			vl->dif_x_b = (float)(vl->c_two_b - vl->c_one_b) / (float)(vl->x_one - vl->x_two);
+	}
+	if (vl->y_two > vl->y_one)
+	{
+			vl->dif_y_r = (float)(vl->c_two_r - vl->c_one_r) / (float)(vl->y_two - vl->y_one);
+			vl->dif_y_v = (float)(vl->c_two_v - vl->c_one_v) / (float)(vl->y_two - vl->y_one);
+			vl->dif_y_b = (float)(vl->c_two_b - vl->c_one_b) / (float)(vl->y_two - vl->y_one);
+	}
+	else
+	{
+			vl->dif_y_r = (float)(vl->c_two_r - vl->c_one_r) / (float)(vl->y_one - vl->y_two);
+			vl->dif_y_v = (float)(vl->c_two_v - vl->c_one_v) / (float)(vl->y_one - vl->y_two);
+			vl->dif_y_b = (float)(vl->c_two_b - vl->c_one_b) / (float)(vl->y_one - vl->y_two);
+	}
+	vl->dif_xi_r = vl->dif_x_r;
+	vl->dif_xi_v = vl->dif_x_v;
+	vl->dif_xi_b = vl->dif_x_b;
+	vl->dif_yi_r = vl->dif_y_r;
+	vl->dif_yi_v = vl->dif_y_v;
+	vl->dif_yi_b = vl->dif_y_b;
+}
+

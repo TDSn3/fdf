@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:27:35 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/16 15:14:53 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/16 22:11:15 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,14 @@ int	main(void)
 
 int	key_hook(int keycode, t_data_util *d)
 {
+	printf("%d\n", keycode);
 	if (keycode == 53 || keycode == 65307)
 	{
 		printf("Close fdf - esc\n");
 		if (d->img->img)
 			mlx_destroy_image(d->mlx, d->img->img);
 		mlx_destroy_window(d->mlx, d->win);
-		mlx_destroy_display(d->mlx);
+////		mlx_destroy_display(d->mlx);
 		free(d->mlx);
 		free_all(d);
 		exit (0);	
@@ -99,13 +100,13 @@ int	key_hook(int keycode, t_data_util *d)
 		d->projection = 0.42;
 		square_size(d);
 	}
-	if (keycode == 119)
+	if (keycode == 119 || keycode == 1)
 		d->projection -= 0.01;
-	if (keycode == 115)
+	if (keycode == 115 || keycode == 13)
 		d->projection += 0.01;
-	if (keycode == 113)
+	if (keycode == 113 || keycode == 12)
 		d->projection = 0;
-	if (keycode == 122)
+	if (keycode == 122 || keycode == 6)
 		d->projection = 1;
 	return (0);
 }
@@ -116,7 +117,7 @@ int	test(t_data_util *d)
 	if (d->img->img)
 		mlx_destroy_image(d->mlx, d->img->img);
 	mlx_destroy_window(d->mlx, d->win);
-	mlx_destroy_display(d->mlx);
+////	mlx_destroy_display(d->mlx);
 	free(d->mlx);
 	free_all(d);
 	exit (0);

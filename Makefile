@@ -6,7 +6,7 @@
 #    By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/17 14:32:32 by tda-silv          #+#    #+#              #
-#    Updated: 2022/11/16 13:56:11 by tda-silv         ###   ########.fr        #
+#    Updated: 2022/11/17 10:13:13 by tda-silv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,11 @@ SRC = $(addprefix ./source/, \
 						   calloc_all.c \
 						   free_all.c \
 						   square_size.c \
+						   first_setup_line_put_vars_xy.c \
+						   first_setup_line_put_vars_ij.c \
+						   $(addprefix octant/, \
+						   					  octant_one.c \
+						   ) \
 	  ) \
 
 OBJ = $(SRC:.c=.o)
@@ -45,17 +50,17 @@ OBJ = $(SRC:.c=.o)
 # **************************************************************************** #
 # Linux																		   #
 # **************************************************************************** #
-
-%.o: %.c
-	$(CC) $(CFLAGS) -I $(INC_DIR) -I mlx_linux -I libft -O3 -c $< -o $@
-
+#
+#%.o: %.c
+#	$(CC) $(CFLAGS) -I $(INC_DIR) -I mlx_linux -I libft -O3 -c $< -o $@
+#
 # **************************************************************************** #
 # Mac OS																	   #
 # **************************************************************************** #
-#
-#%.o: %.c
-#	$(CC) $(CFLAGS) -I $(INC_DIR) -I mlx_macos -I libft -c $< -o $@
-#
+
+%.o: %.c
+	$(CC) $(CFLAGS) -I $(INC_DIR) -I mlx_macos -I libft -c $< -o $@
+
 ################################################################################
 
 all: $(NAME) $(HEADERS)
@@ -63,21 +68,21 @@ all: $(NAME) $(HEADERS)
 # **************************************************************************** #
 # Linux																		   #
 # **************************************************************************** #
-
-$(NAME): $(OBJ)
-	@cd mlx_linux; make >> /dev/null 2>> /dev/null; cd ..
-	@cd libft; make; cd ..
-	$(CC) $(OBJ) -Lmlx_linux -lmlx_Linux -I$(INC_DIR) -Imlx_linux -Llibft -lft -Ilibft -lXext -lX11 -lm -lz -o $(NAME)
-
+#
+#$(NAME): $(OBJ)
+#	@cd mlx_linux; make >> /dev/null 2>> /dev/null; cd ..
+#	@cd libft; make; cd ..
+#	$(CC) $(OBJ) -Lmlx_linux -lmlx_Linux -I$(INC_DIR) -Imlx_linux -Llibft -lft -Ilibft -lXext -lX11 -lm -lz -o $(NAME)
+#
 # **************************************************************************** #
 # Mac OS																	   #
 # **************************************************************************** #
-#
-#$(NAME): $(OBJ)
-#	@cd mlx_macos; make
-#	@cd libft; make
-#	$(CC) $(OBJ) -Lmlx_macos -lmlx -Llibft -lft -framework OpenGL -framework AppKit -o $(NAME)
-#
+
+$(NAME): $(OBJ)
+	@cd mlx_macos; make
+	@cd libft; make
+	$(CC) $(OBJ) -Lmlx_macos -lmlx -Llibft -lft -framework OpenGL -framework AppKit -o $(NAME)
+
 ################################################################################
 
 clean:
