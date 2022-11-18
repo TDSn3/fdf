@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 15:15:01 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/17 00:28:03 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/18 16:52:23 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,7 @@ int	setup_tab(t_data_util *d, const char *pathname)
 		return (1);
 	v.fd = open(pathname, O_RDWR);
 	if (v.fd == -1)
-	{
-		write(1, "\nOpen error\n", 12);
 		return (1);
-	}
 	v.str = get_next_line(v.fd);
 	body(d, &v);
 	return (0);

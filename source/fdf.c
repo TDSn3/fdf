@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:27:35 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/18 11:45:24 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/18 16:58:49 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ int	main(int argc, char **argv)
 	d.win = mlx_new_window(d.mlx, d.win_widht, d.win_height, "fdf");
 	if (setup_tab(&d, argv[1]))
 	{
+		mlx_destroy_window(d.mlx, d.win);
+		mlx_destroy_display(d.mlx);
+		free(d.mlx);
 		free_all(&d);
 		return (1);
 	}
@@ -46,7 +49,7 @@ int	red_button(t_data_util *d)
 	if (d->img->img)
 		mlx_destroy_image(d->mlx, d->img->img);
 	mlx_destroy_window(d->mlx, d->win);
-//	mlx_destroy_display(d->mlx);
+	mlx_destroy_display(d->mlx);
 	free(d->mlx);
 	free_all(d);
 	exit (0);

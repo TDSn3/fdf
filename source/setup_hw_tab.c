@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 16:40:10 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/10/30 16:57:44 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/18 16:52:57 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,7 @@ int	setup_hw_tab(t_data_util *d, const char *pathname)
 
 	fd = open(pathname, O_RDWR);
 	if (fd == -1)
-	{
-		write(1, "\nOpen error\n", 12);
 		return (1);
-	}
 	str = get_next_line(fd);
 	d->tab_widht = width_tab(str);
 	while (str)

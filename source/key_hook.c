@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 08:36:15 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/18 13:00:00 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/18 16:46:50 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	part_two(int keycode, t_data_util *d)
 		if (d->img->img)
 			mlx_destroy_image(d->mlx, d->img->img);
 		mlx_destroy_window(d->mlx, d->win);
-//		mlx_destroy_display(d->mlx);
+		mlx_destroy_display(d->mlx);
 		free(d->mlx);
 		free_all(d);
 		exit (0);
