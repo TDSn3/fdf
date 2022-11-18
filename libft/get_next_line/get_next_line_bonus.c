@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 17:11:03 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/10/28 04:32:14 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/18 19:41:11 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,11 @@ static int	ft_start_gnl(char *buffer_p, char **str, char **str_three, int *i)
 	*str_three = 0;
 	if (*buffer_p)
 	{
+		if (ft_strlen_stop_nl(buffer_p) + 1 == 1)
+		{
+			*str = NULL;
+			return (1);
+		}
 		*str = malloc(ft_strlen_stop_nl(buffer_p) + 1);
 		ft_strlcpy(*str, buffer_p, ft_strlen_stop_nl(buffer_p) + 1);
 		if (ft_strchr_buffer_nl(buffer_p, *i))

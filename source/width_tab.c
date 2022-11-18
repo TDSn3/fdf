@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 06:00:53 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/16 21:50:32 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/18 19:17:13 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,16 @@ int	width_tab(char *str)
 
 	i = 0;
 	width = 0;
-	while (str[i] && str[i] == ' ')
-		i++;
-	while (str[i])
+	if (str && str[i])
 	{
-		if (part_two(str, &i, &width))
-			break ;
-		part_three(str, &i, &width);
+		while (str[i] && str[i] == ' ')
+			i++;
+		while (str[i])
+		{
+			if (part_two(str, &i, &width))
+				break ;
+			part_three(str, &i, &width);
+		}
 	}
 	return (width);
 }

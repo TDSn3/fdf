@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:27:35 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/18 16:58:49 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/18 19:56:31 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,13 @@ int	main(int argc, char **argv)
 	setup_struct(&d);
 	img.img = NULL;
 	d.img = &img;
-	d.mlx = mlx_init();
-	d.win = mlx_new_window(d.mlx, d.win_widht, d.win_height, "fdf");
 	if (setup_tab(&d, argv[1]))
 	{
-		mlx_destroy_window(d.mlx, d.win);
-		mlx_destroy_display(d.mlx);
-		free(d.mlx);
 		free_all(&d);
 		return (1);
 	}
+	d.mlx = mlx_init();
+	d.win = mlx_new_window(d.mlx, d.win_widht, d.win_height, "fdf");
 	mlx_key_hook(d.win, key_hook, &d);
 	mlx_hook(d.win, 17, 0L, red_button, &d);
 	mlx_loop_hook(d.mlx, gen_new_img, &d);
@@ -45,7 +42,6 @@ int	main(int argc, char **argv)
 
 int	red_button(t_data_util *d)
 {
-	printf("Close fdf - red button\n");
 	if (d->img->img)
 		mlx_destroy_image(d->mlx, d->img->img);
 	mlx_destroy_window(d->mlx, d->win);
