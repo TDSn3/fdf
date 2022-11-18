@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 08:36:15 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/18 12:21:08 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/18 13:00:00 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,11 @@ static void	part_three(int keycode, t_data_util *d)
 	if (keycode == 65362 || keycode == 126)
 		d->y_shift += 20;
 	if ((keycode == 97 || keycode == 0) && d->rotation <= -180)
-		d->rotation = 180;
+		d->rotation = 175;
 	else if (keycode == 97 || keycode == 0)
 		d->rotation -= 5;
 	if ((keycode == 100 || keycode == 2) && d->rotation >= 180)
-		d->rotation = -180;
+		d->rotation = -175;
 	else if (keycode == 100 || keycode == 2)
 		d->rotation += 5;
 	if (keycode == 119 || keycode == 1)
