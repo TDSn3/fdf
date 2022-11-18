@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   octant_five.c                                      :+:      :+:    :+:   */
+/*   dy_zero_dx_sup.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/17 08:59:20 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/18 07:09:33 by tda-silv         ###   ########.fr       */
+/*   Created: 2022/11/18 07:33:12 by tda-silv          #+#    #+#             */
+/*   Updated: 2022/11/18 07:37:44 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,13 @@
 
 static void	change_dif_and_color(t_line_put_vars *vl);
 
-void	octant_five(t_data_util *d, t_line_put_vars *vl)
+void	dy_zero_dx_sup(t_data_util *d, t_line_put_vars *vl)
 {
 	int	x;
 	int	y;
 
-	vl->e = vl->dx;
-	vl->dx = vl->e * 2;
-	vl->dy = vl->dy * 2;
 	vl->color = (vl->c_one_r << 16) + (vl->c_one_v << 8) + (vl->c_one_b);
-	while (vl->x_one > vl->x_two)
+	while (vl->x_one < vl->x_two)
 	{
 		x = vl->x_one + d->x_shift;
 		y = vl->y_one + d->y_shift;
@@ -32,13 +29,7 @@ void	octant_five(t_data_util *d, t_line_put_vars *vl)
 			&& vl->x_one + d->x_shift < d->win_widht
 			&& vl->y_one + d->y_shift < d->win_height)
 			my_mlx_pixel_put(d->img, x, y, vl->color);
-		vl->x_one--;
-		vl->e = vl->e + vl->dy;
-		if (vl->e >= 0)
-		{
-			vl->y_one++;
-			vl->e = vl->e + vl->dx;
-		}
+		vl->x_one++;
 		change_dif_and_color(vl);
 	}
 }

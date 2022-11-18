@@ -6,14 +6,13 @@
 #    By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/17 14:32:32 by tda-silv          #+#    #+#              #
-#    Updated: 2022/11/17 10:13:13 by tda-silv         ###   ########.fr        #
+#    Updated: 2022/11/18 08:49:12 by tda-silv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 
-CFLAGS = 
-#CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 NAME = fdf
 
@@ -24,6 +23,8 @@ HEADERS = ./include/header.h \
 
 SRC = $(addprefix ./source/, \
 						   fdf.c \
+						   check_error.c \
+						   key_hook.c \
 						   line_put.c \
 						   rotate_pixel_x.c \
 						   rotate_pixel_y.c \
@@ -41,7 +42,20 @@ SRC = $(addprefix ./source/, \
 						   first_setup_line_put_vars_xy.c \
 						   first_setup_line_put_vars_ij.c \
 						   $(addprefix octant/, \
-						   					  octant_one.c \
+											  octant_one.c \
+											  octant_two.c \
+											  octant_three.c \
+											  octant_four.c \
+											  octant_five.c \
+											  octant_six.c \
+											  octant_seven.c \
+											  octant_eight.c \
+											  dy_zero_dx_sup.c \
+											  dy_zero_dx_inf.c \
+											  dy_sup_dx_zero.c \
+											  dy_inf_dx_zero.c \
+											  ssv.c \
+											  ssvptt.c \
 						   ) \
 	  ) \
 

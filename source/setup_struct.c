@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 14:02:12 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/16 17:41:27 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/18 08:35:18 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	setup_struct(t_data_util *d)
 	d->mlx = NULL;
 	d->win = NULL;
 	d->img = NULL;
-	d->win_widht = 0;
-	d->win_height = 0;
+	d->win_widht = 1480;
+	d->win_height = 920;
 	d->square_size = 0;
 	d->tab_widht = 0;
 	d->tab_height = 0;
