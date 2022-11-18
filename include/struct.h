@@ -6,14 +6,14 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 15:11:18 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/17 09:06:31 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/18 12:19:03 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-typedef struct	s_data_mlximg
+typedef struct s_data_mlximg
 {
 	void	*img;
 	char	*addr;
@@ -22,21 +22,21 @@ typedef struct	s_data_mlximg
 	int		endian;
 }	t_data_mlximg;
 
-typedef struct	s_rotate_all_vars
+typedef struct s_rotate_all_vars
 {
-	int i;
-	int j;
-	float w;
-	float h;
-	int	win_h_div;
-	int	win_w_div;
-	int	x_o;
-	int	y_o;
-	int	x_next;
-	int	y_next;
+	int		i;
+	int		j;
+	float	w;
+	float	h;
+	int		win_h_div;
+	int		win_w_div;
+	int		x_o;
+	int		y_o;
+	int		x_next;
+	int		y_next;
 }	t_rotate_all_vars;
 
-typedef struct	s_setup_tab_vars
+typedef struct s_setup_tab_vars
 {
 	int		fd;
 	int		comma;
@@ -46,7 +46,7 @@ typedef struct	s_setup_tab_vars
 	char	*str;
 }	t_setup_tab_vars;
 
-typedef struct	s_line_put_vars
+typedef struct s_line_put_vars
 {
 	int		i_one;
 	int		j_one;
@@ -80,14 +80,14 @@ typedef struct	s_line_put_vars
 	float	dif_yi_b;
 }	t_line_put_vars;
 
-typedef struct	s_data_util
+typedef struct s_data_util
 {
 	void			*mlx;
 	void			*win;
 	t_data_mlximg	*img;
 	int				win_widht;
 	int				win_height;
-	int 			square_size;
+	int				square_size;
 	int				tab_widht;
 	int				tab_height;
 	int				**tab_hw;

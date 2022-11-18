@@ -6,54 +6,68 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:39:07 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/16 14:00:32 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/18 11:29:33 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <header.h>
 
-t_li *nb_nb_point(t_data_util *d)
+static void	part_two(t_data_util *d, int one_zero, t_li *li);
+static void	part_three(t_li *li);
+static t_li	*part_four(t_li *li);
+static void	part_five(t_data_util *d, t_li *part_five, t_li *li);
+
+t_li	*nb_nb_point(t_data_util *d)
 {
-	int		i;
-	int		j;
-	int		one_zero;
 	t_li	*li;
+
+	li = NULL;
+	li_add_back(&li, li_new(d->tab_hw[0][0], -1));
+	part_two(d, (d->tab_hw[0][0] == 0), li);
+	part_three(li);
+	part_five(d, part_four(li), li);
+	return (li);
+}
+
+static void	part_two(t_data_util *d, int one_zero, t_li *li)
+{
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
-	one_zero = 0;
-	li = NULL;
-	li_add_back(&li, li_new(d->tab_hw[i][j], -1));
-	if (d->tab_hw[i][j] == 0)
-		one_zero++;
 	while (i < d->tab_height)
 	{
 		while (j < d->tab_widht)
 		{
-			if (li_find_content(li, d->tab_hw[i][j]) == 0 && d->tab_hw[i][j] != 0)
+			if (li_find_content(li, d->tab_hw[i][j]) == 0
+					&& d->tab_hw[i][j] != 0)
 			{
 				li_add_back(&li, li_new(d->tab_hw[i][j], -1));
 			}
-			if (li_find_content(li, d->tab_hw[i][j]) == 0 && d->tab_hw[i][j] == 0 && one_zero == 0)
+			if (li_find_content(li, d->tab_hw[i][j]) == 0
+				&& d->tab_hw[i][j] == 0 && one_zero == 0)
 			{
 				li_add_back(&li, li_new(d->tab_hw[i][j], -1));
-				one_zero++;				
+				one_zero++;
 			}
 			j++;
 		}
 		j = 0;
 		i++;
 	}
-	int pos;
-	int	list_size;
+}
+
+static void	part_three(t_li *li)
+{
+	int		i;
+	int		pos;
 	t_li	*cpy_one;
 	t_li	*cpy_two;
 
 	i = 0;
 	pos = 0;
-	list_size = li_size(li);
 	cpy_one = li;
-	printf("size li = %d\n", list_size);
 	while (cpy_one)
 	{
 		pos = cpy_one->content_one;
@@ -68,27 +82,41 @@ t_li *nb_nb_point(t_data_util *d)
 		i = 0;
 		cpy_one = cpy_one->next;
 	}
+}
+
+static t_li	*part_four(t_li *li)
+{
+	int		list_size;
 	t_li	*cpy_four;
+
 	cpy_four = li;
+	list_size = li_size(li);
 	while (cpy_four)
 	{
-		cpy_four->content_three = ((0x00000000 / (list_size - 1)) * (cpy_four->content_two + 0)) << 16;	// R
-		cpy_four->content_four = ((0x00000000 / (list_size - 1)) * (cpy_four->content_two + 0)) << 8;	// V
-		cpy_four->content_five = (0x000000ff / (list_size - 1)) * (cpy_four->content_two + 0);			// B
-		if (cpy_four->content_three == 0)
+		cpy_four->content_three = ((0x00000000 / (list_size - 1))
+				* (cpy_four->content_two + 0)) << 16;
+		cpy_four->content_four = ((0x00000000 / (list_size - 1))
+				* (cpy_four->content_two + 0)) << 8;
+		cpy_four->content_five = (0x000000ff / (list_size - 1))
+			* (cpy_four->content_two + 0);
+		if (cpy_four->content_three == 0
+			&& cpy_four->content_four == 0
+			&& cpy_four->content_five == 0)
 		{
-			if (cpy_four->content_four == 0)
-			{
-				if (cpy_four->content_five == 0)
-				{
-					cpy_four->content_three = 0x00aa0000;
-					cpy_four->content_four = 0x0000ff00;
-					cpy_four->content_five = 0x000000ff;
-				}
-			}
+			cpy_four->content_three = 0x00aa0000;
+			cpy_four->content_four = 0x0000ff00;
+			cpy_four->content_five = 0x000000ff;
 		}
 		cpy_four = cpy_four->next;
 	}
+	return (cpy_four);
+}
+
+static void	part_five(t_data_util *d, t_li *cpy_four, t_li *li)
+{
+	int	i;
+	int	j;
+
 	i = 0;
 	j = 0;
 	while (i < d->tab_height)
@@ -98,12 +126,11 @@ t_li *nb_nb_point(t_data_util *d)
 			cpy_four = li;
 			while (cpy_four->content_one != d->tab_hw[i][j])
 				cpy_four = cpy_four->next;
-			 d->tab_color[i][j] = cpy_four->content_three + cpy_four->content_four + cpy_four->content_five;
+			d->tab_color[i][j] = cpy_four->content_three
+				+ cpy_four->content_four + cpy_four->content_five;
 			j++;
 		}
 		j = 0;
 		i++;
 	}
-
-	return (li);
 }

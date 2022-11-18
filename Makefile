@@ -6,7 +6,7 @@
 #    By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/17 14:32:32 by tda-silv          #+#    #+#              #
-#    Updated: 2022/11/18 08:49:12 by tda-silv         ###   ########.fr        #
+#    Updated: 2022/11/18 11:46:38 by tda-silv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRC = $(addprefix ./source/, \
 						   rotate_pixel_x.c \
 						   rotate_pixel_y.c \
 						   rotate_all.c \
+						   rotate_all_rev.c \
 						   my_mlx_pixel_put.c \
 						   width_tab.c \
 						   setup_struct.c \

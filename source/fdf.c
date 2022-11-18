@@ -6,7 +6,7 @@
 /*   By: tda-silv <tda-silv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:27:35 by tda-silv          #+#    #+#             */
-/*   Updated: 2022/11/18 08:55:44 by tda-silv         ###   ########.fr       */
+/*   Updated: 2022/11/18 11:45:24 by tda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int argc, char **argv)
 	d.img = &img;
 	d.mlx = mlx_init();
 	d.win = mlx_new_window(d.mlx, d.win_widht, d.win_height, "fdf");
-	if (setup_tab(&d, "mlx_util/maps/test_maps/t2.fdf"))
+	if (setup_tab(&d, argv[1]))
 	{
 		free_all(&d);
 		return (1);
@@ -61,7 +61,10 @@ int	gen_new_img(t_data_util *d)
 			&d->img->line_length,
 			&d->img->endian);
 	put_background(d);
-	rotate_all(d);
+	if (d->rotation < 90 && d->rotation > -91)
+		rotate_all(d);
+	else
+		rotate_all_rev(d);
 	mlx_put_image_to_window(d->mlx, d->win, d->img->img, 0, 0);
 	mlx_destroy_image(d->mlx, d->img->img);
 	d->img->img = NULL;

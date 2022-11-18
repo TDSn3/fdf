@@ -1,7 +1,0 @@
-{
-    "files.associations": {
-        "sstream": "c",
-        "atomic": "c",
-        "bitset": "c"
-    }
-}
