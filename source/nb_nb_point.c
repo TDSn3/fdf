@@ -93,23 +93,7 @@ static t_li	*part_four(t_li *li)
 	list_size = li_size(li);
 	while (cpy_four)
 	{
-		if (list_size > 1)
-		{
-			cpy_four->content_three = ((0x00000000 / (list_size - 1))
-					* (cpy_four->content_two + 0)) << 16;
-			cpy_four->content_four = ((0x00000000 / (list_size - 1))
-					* (cpy_four->content_two + 0)) << 8;
-			cpy_four->content_five = (0x000000ff / (list_size - 1))
-				* (cpy_four->content_two + 0);
-		}
-		else if (list_size == 1)
-		{
-			cpy_four->content_three = 0x00000000 << 16;
-			cpy_four->content_four = 0x00000000 << 8;
-			cpy_four->content_five = 0x000000ff;
-		}
-		else
-			exit (1);
+		nb_nb_six(list_size, cpy_four);
 		if (cpy_four->content_three == 0
 			&& cpy_four->content_four == 0
 			&& cpy_four->content_five == 0)

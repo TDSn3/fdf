@@ -52,5 +52,6 @@ void	ssvptt(t_line_put_vars *vl);
 void	first_setup_line_put_vars_xy(t_line_put_vars *v, int x_two, int y_two);
 void	first_setup_line_put_vars_ij(t_line_put_vars *v, int i_two, int j_two);
 void	rotate_all_rev(t_data_util *d);
+void	nb_nb_six(int list_size, t_li *cpy_four);
 
 #endif

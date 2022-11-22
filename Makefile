@@ -42,6 +42,7 @@ SRC = $(addprefix ./source/, \
 						   square_size.c \
 						   first_setup_line_put_vars_xy.c \
 						   first_setup_line_put_vars_ij.c \
+						   nb_nb_six.c \
 						   $(addprefix octant/, \
 											  octant_one.c \
 											  octant_two.c \
